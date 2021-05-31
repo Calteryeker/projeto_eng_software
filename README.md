@@ -12,14 +12,14 @@
 ## Delegação de papéis
 <ul>
     <li><b>SCRUM MASTER:</b> Henrique Sabino</li>
-    <li><b>PRODUCT OWNER:</b> Eduardo Lima</li>
     <li><b>DEVELOPMENT TEAM:</b>
         <ul>
-            <li>Silas Augusto</li>
-            <li>Nelson Lins</li>
-            <li>Marielly Lins</li>
             <li>Cláudio Márcio</li>
+            <li>Eduardo Lima</li>
             <li>Hyan Batista</li>
+            <li>Marielly Lins</li>
+            <li>Nelson Lins</li>
+            <li>Silas Augusto</li>
         </ul>
     </li>
 </ul>
