@@ -20,6 +20,7 @@ public class Main {
 
             System.out.println("Opção: ");
             int decisao = sc.nextInt();
+            sc.nextLine();
 
             if (decisao == 1) {
 

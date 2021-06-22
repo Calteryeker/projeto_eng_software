@@ -11,6 +11,10 @@ public class ControladorDadosPersistentes {
     private IDadosPersistentes dadosPersistentes;
     private static ControladorDadosPersistentes instance;
 
+    public ControladorDadosPersistentes() {
+        dadosPersistentes = new DadosPersistentes("./localstorage/usuarios.dat");
+    }
+
     public static ControladorDadosPersistentes getInstance() {
 
         if (instance == null) {

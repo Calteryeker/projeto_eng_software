@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e717ad7f-d87f-4550-b283-8bb3bb8caf7d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/controllers/ControladorLogin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/SenhaIncorretaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/UsuarioNaoEncontradoException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/Main.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/ControladorDadosPersistentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ControladorDadosPersistentes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/IDadosPersistentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/IDadosPersistentes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/impl/DadosPersistentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/impl/DadosPersistentes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/impl/exceptions/DadosNaoPreenchidosException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/DadosNaoPreenchidosException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/impl/exceptions/UsuarioCadastradoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/UsuarioCadastradoException.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,5 +87,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.FileNotFoundException" package="java.io" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

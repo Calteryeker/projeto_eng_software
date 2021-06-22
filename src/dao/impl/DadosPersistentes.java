@@ -12,9 +12,9 @@ import java.util.List;
 public class DadosPersistentes implements IDadosPersistentes {
 
     private List<Usuario> usuarios = new ArrayList<>();
-    private static String path = "./localstorage/usuarios.dat";
+    private static String path;
 
-    public DadosPersistentes() {
+    public DadosPersistentes(String path) {
 
         File e = new File(path);
 
@@ -25,6 +25,7 @@ public class DadosPersistentes implements IDadosPersistentes {
             FileUtilRepository.saveFile(usuarios, path);
         }
         FileUtilRepository.saveFile(usuarios, path);
+
     }
 
     public void recuperarMetasUsuario() {
