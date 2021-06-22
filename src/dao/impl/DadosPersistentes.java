@@ -48,13 +48,11 @@ public class DadosPersistentes implements IDadosPersistentes {
             for (Usuario x : usuarios) {
 
                 if (x.getNome().equals(nome) || x.getLogin().equals(login)) {
-
-                    throw new UsuarioCadastradoException("Usuario Cadastrado");
-
-                } else {
-                    usuarios.add(new Usuario(nome, login, senha));
+                    throw new UsuarioCadastradoException("Usuario já Cadastrado");
                 }
             }
+            usuarios.add(new Usuario(nome, login, senha));
+            System.out.println("Usuario cadastrado com sucesso!!");
         }
         FileUtilRepository.saveFile(usuarios, path);
     }
@@ -65,5 +63,9 @@ public class DadosPersistentes implements IDadosPersistentes {
 
     public void removerUsuario() {
 
+    }
+
+    public List getUsuarios() {
+        return usuarios;
     }
 }

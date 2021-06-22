@@ -3,6 +3,8 @@ package dao;
 import dao.impl.exceptions.UsuarioCadastradoException;
 import model.Usuario;
 
+import java.util.List;
+
 public interface IDadosPersistentes {
 
     void recuperarMetasUsuario();
@@ -16,4 +18,7 @@ public interface IDadosPersistentes {
     void recuperarCategorias();
 
     void removerUsuario();
+
+    List<Usuario> getUsuarios();
+
 }
