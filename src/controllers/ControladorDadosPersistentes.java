@@ -12,7 +12,7 @@ public class ControladorDadosPersistentes {
     private static ControladorDadosPersistentes instance;
 
     public ControladorDadosPersistentes() {
-        dadosPersistentes = new DadosPersistentes("./localstorage/usuarios.dat");
+        this.dadosPersistentes = new DadosPersistentes("./localstorage/usuarios.ser");
     }
 
     public static ControladorDadosPersistentes getInstance() {

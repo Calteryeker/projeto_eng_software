@@ -11,20 +11,18 @@ import java.util.List;
 
 public class DadosPersistentes implements IDadosPersistentes {
 
-    private List<Usuario> usuarios = new ArrayList<>();
-    private static String path;
+    private List<Usuario> usuarios;
+    private String path;
 
     public DadosPersistentes(String path) {
 
-        File e = new File(path);
+        this.path = path;
+        this.usuarios = new ArrayList<>();
 
-        if (e.exists()) {
-            FileUtilRepository.readFile(path);
-        } else {
-            usuarios = new ArrayList<>();
-            FileUtilRepository.saveFile(usuarios, path);
+        Object elementsList = FileUtilRepository.readFile(this.path);
+        if (elementsList != null && elementsList instanceof List<?>){
+            this.usuarios = (List<Usuario>) elementsList;
         }
-        FileUtilRepository.saveFile(usuarios, path);
 
     }
 
@@ -44,6 +42,7 @@ public class DadosPersistentes implements IDadosPersistentes {
 
         if (usuarios.isEmpty()) {
             usuarios.add(new Usuario(nome, login, senha));
+            System.out.println("Usuario cadastrado com sucesso!!");
         } else {
 
             for (Usuario x : usuarios) {
