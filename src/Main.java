@@ -38,7 +38,7 @@ public class Main {
                 String username = sc.nextLine();
                 System.out.println("Senha: ");
                 String senha = sc.nextLine();
-                login.getInstance().login(username,senha);
+                login.getInstance().login(username, senha);
             }
 
         }
