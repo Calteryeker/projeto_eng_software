@@ -1,10 +1,9 @@
 package dao.impl;
 
 import dao.IDadosPersistentes;
-import dao.impl.exceptions.UsuarioCadastradoException;
+import dao.impl.exceptions.UsuarioJaCadastradoException;
 import model.Usuario;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class DadosPersistentes implements IDadosPersistentes {
 
     }
 
-    public void cadastrarNovoUsuario(String nome, String login, String senha) throws UsuarioCadastradoException {
+    public void cadastrarNovoUsuario(String nome, String login, String senha) throws UsuarioJaCadastradoException {
 
         if (usuarios.isEmpty()) {
             usuarios.add(new Usuario(nome, login, senha));
@@ -48,7 +47,7 @@ public class DadosPersistentes implements IDadosPersistentes {
             for (Usuario x : usuarios) {
 
                 if (x.getNome().equals(nome) || x.getLogin().equals(login)) {
-                    throw new UsuarioCadastradoException("Usuario já Cadastrado");
+                    throw new UsuarioJaCadastradoException("Usuario já Cadastrado");
                 }
             }
             usuarios.add(new Usuario(nome, login, senha));

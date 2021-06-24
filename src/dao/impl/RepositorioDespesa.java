@@ -1,18 +1,42 @@
-package model;
+package dao.impl;
 
+import dao.IRepositorioDespesa;
 import dao.impl.exceptions.DespesaNaoEncontradaException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import model.Categoria;
+import model.Despesa;
+import model.Usuario;
 
-public class RepositorioDespesa implements Serializable {
+public class RepositorioDespesa implements IRepositorioDespesa {
 
-    private List<Despesa> despesas = new ArrayList<>();
+    private List<Despesa> despesas;
+    private String path;
 
-    public void criarDespesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria) {
-        despesas.add(new Despesa(nome, idDespesa, valor, data_criacao, categoria));
+    public RepositorioDespesa (String path){
+
+        this.path = path;
+        this.despesas = new ArrayList<>();
+
+        Object elementsList = FileUtilRepository.readFile(this.path);
+        if (elementsList != null && elementsList instanceof List<?>){
+            this.despesas = (List<Despesa>) elementsList;
+        }
+    }
+
+    public void criarDespesa(String nome, double valor, LocalDate data_criacao, Categoria categoria) {
+
+        Despesa auxDespesa = new Despesa(nome, valor, data_criacao, categoria);
+
+        auxDespesa.setOrdem(LocalDateTime.now().hashCode());
+
+        despesas.add(auxDespesa);
+
+        FileUtilRepository.saveFile(despesas, path);
     }
 
     public void editarDespesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria) throws DespesaNaoEncontradaException {
@@ -27,11 +51,13 @@ public class RepositorioDespesa implements Serializable {
 
         if (auxiliar != -1) {
 
-            despesas.set(auxiliar, new Despesa(nome, idDespesa, valor, data_criacao, categoria));
+            despesas.set(auxiliar, new Despesa(nome, valor, data_criacao, categoria));
             System.out.println("Despesa alterada com sucesso !!");
         } else {
             throw new DespesaNaoEncontradaException("Despesa não encontrada!!");
         }
+
+        FileUtilRepository.saveFile(despesas, path);
     }
 
     public void removerDespesa(int idDespesa) throws DespesaNaoEncontradaException {
@@ -48,6 +74,8 @@ public class RepositorioDespesa implements Serializable {
         } else {
             throw new DespesaNaoEncontradaException("Despesa não encontrada!!");
         }
+
+        FileUtilRepository.saveFile(despesas, path);
     }
 
     public void setDespesas(List<Despesa> despesas) {

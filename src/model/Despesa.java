@@ -13,11 +13,11 @@ public class Despesa implements Serializable {
     private LocalDate data_criacao;
     private Categoria categoria;
 
+    public Despesa() {};
 
-    public Despesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria) {
+    public Despesa(String nome, double valor, LocalDate data_criacao, Categoria categoria) {
 
         this.nome = nome;
-        this.idDespesa = idDespesa;
         this.valor = valor;
         this.data_criacao = data_criacao;
         this.categoria = categoria;
@@ -69,7 +69,7 @@ public class Despesa implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Despesa despesa = (Despesa) o;
-        return idDespesa == despesa.idDespesa && Double.compare(despesa.valor, valor) == 0 && nome.equals(despesa.nome) && Objects.equals(data_criacao, despesa.data_criacao) && categoria.equals(despesa.categoria);
+        return Double.compare(despesa.valor, valor) == 0 && nome.equals(despesa.nome) && Objects.equals(data_criacao, despesa.data_criacao) && categoria.equals(despesa.categoria);
     }
 
     @Override

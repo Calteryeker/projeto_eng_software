@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ControladorLogin {
 
+    private Usuario loggedUser = new Usuario();
+
     private static ControladorLogin instance;
 
     public static ControladorLogin getInstance() {
@@ -19,19 +21,24 @@ public class ControladorLogin {
         return instance;
     }
 
-    public boolean login(String nome, String senha) throws SenhaIncorretaException, UsuarioNaoEncontradoException {
+    public String login(String nome, String senha) throws SenhaIncorretaException, UsuarioNaoEncontradoException {
 
         List<Usuario> usuarios = ControladorDadosPersistentes.getInstance().getDadosPersistentes().getUsuarios();
         for (Usuario x : usuarios) {
             if (x.getLogin().equals(nome)) {
                 if (x.getSenha().equals(senha)) {
-                    System.out.println("Logado!!");
-                    return true;
+
+                    loggedUser = x;
+                    return x.getLogin();
                 } else {
-                    throw new SenhaIncorretaException("Senha Incorreta !!");
+                    throw new SenhaIncorretaException("Senha Incorreta!!");
                 }
             }
         }
         throw new UsuarioNaoEncontradoException("Usuario não encontrado!!");
+    }
+
+    public Usuario getLoggedUser(){
+        return loggedUser;
     }
 }

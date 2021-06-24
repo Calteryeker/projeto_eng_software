@@ -1,12 +1,13 @@
-package model;
+package dao.impl;
 
 import dao.impl.exceptions.MetaNaoEncontradaException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import model.Meta;
 
-public class RepositorioMeta implements Serializable {
+public class RepositorioMeta {
 
     List<Meta> metas = new ArrayList<>();
 

@@ -1,10 +1,9 @@
 package controllers;
 
-import com.sun.jdi.InterfaceType;
 import dao.IDadosPersistentes;
 import dao.impl.DadosPersistentes;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
-import dao.impl.exceptions.UsuarioCadastradoException;
+import dao.impl.exceptions.UsuarioJaCadastradoException;
 
 public class ControladorDadosPersistentes {
 
@@ -23,7 +22,7 @@ public class ControladorDadosPersistentes {
         return instance;
     }
 
-    public void cadastrarUsuario(String nome, String login, String senha) throws DadosNaoPreenchidosException, UsuarioCadastradoException {
+    public void cadastrarUsuario(String nome, String login, String senha) throws DadosNaoPreenchidosException, UsuarioJaCadastradoException {
 
         if (nome.equals(null) || login.equals(null) || senha.equals(null)) {
             throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");

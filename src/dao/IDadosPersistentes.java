@@ -1,6 +1,6 @@
 package dao;
 
-import dao.impl.exceptions.UsuarioCadastradoException;
+import dao.impl.exceptions.UsuarioJaCadastradoException;
 import model.Usuario;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface IDadosPersistentes {
 
     void salvarDadosUsuario();
 
-    void cadastrarNovoUsuario(String nome, String login, String senha) throws UsuarioCadastradoException;
+    void cadastrarNovoUsuario(String nome, String login, String senha) throws UsuarioJaCadastradoException;
 
     void recuperarCategorias();
 
