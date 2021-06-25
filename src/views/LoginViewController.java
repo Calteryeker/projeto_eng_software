@@ -14,6 +14,10 @@ public class LoginViewController {
 
     private static LoginViewController instance;
 
+    private LoginViewController() {
+
+    }
+
     public static LoginViewController getInstance() {
 
         if (instance == null) {

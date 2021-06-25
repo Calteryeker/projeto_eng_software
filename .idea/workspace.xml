@@ -20,33 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d810210-c495-46cd-a7b2-173df2308fc0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/LoginViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/ControladorCategoria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/CategoriaNulaException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/DataDespesaInvalidaException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/NomeCategoriaInvalidoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/NomeDespesaInvalidoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/NumeroDeCategoriaSelecionadaInvalidoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/NumeroDespesaSelecionadaInvalidoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/ValorDespesaInvalidoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/DespesaViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/localstorage/usuarios.ser" beforeDir="false" afterPath="$PROJECT_DIR$/localstorage/usuarios.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorDadosPersistentes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorDadosPersistentes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorDespesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorDespesa.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/IDadosPersistentes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/IDadosPersistentes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/IRepositorioDespesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/IRepositorioDespesa.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/DadosPersistentes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/DadosPersistentes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/FileUtilRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/FileUtilRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/RepositorioDespesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/RepositorioDespesa.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/RepositorioMeta.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/RepositorioMeta.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/DadosNaoPreenchidosException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/DadosNaoPreenchidosException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/DespesaNaoEncontradaException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/DespesaNaoEncontradaException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/MetaNaoEncontradaException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/MetaNaoEncontradaException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/SenhaIncorretaException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/SenhaIncorretaException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/UsuarioJaCadastradoException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/UsuarioJaCadastradoException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/UsuarioNaoEncontradoException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/exceptions/UsuarioNaoEncontradoException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Categoria.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Categoria.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Despesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Despesa.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Meta.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Meta.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Usuario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/views/LoginViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/views/LoginViewController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/ControladorDadosPersistentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ControladorDadosPersistentes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/ControladorDespesa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ControladorDespesa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/impl/DadosPersistentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/impl/DadosPersistentes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/LoginViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/LoginViewController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

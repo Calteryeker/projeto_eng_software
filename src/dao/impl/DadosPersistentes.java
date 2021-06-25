@@ -64,7 +64,8 @@ public class DadosPersistentes implements IDadosPersistentes {
 
     }
 
-    public List getUsuarios() {
+    @Override
+    public List<Usuario> getUsuarios() {
         return usuarios;
     }
 }
