@@ -10,7 +10,7 @@ public class ControladorDadosPersistentes {
     private IDadosPersistentes dadosPersistentes;
     private static ControladorDadosPersistentes instance;
 
-    public ControladorDadosPersistentes() {
+    private ControladorDadosPersistentes() {
         this.dadosPersistentes = new DadosPersistentes("./localstorage/usuarios.ser");
     }
 
@@ -24,7 +24,7 @@ public class ControladorDadosPersistentes {
 
     public void cadastrarUsuario(String nome, String login, String senha) throws DadosNaoPreenchidosException, UsuarioJaCadastradoException {
 
-        if (nome.equals(null) || login.equals(null) || senha.equals(null)) {
+        if (nome == null || login == null || senha == null) {
             throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
         } else {
             dadosPersistentes.cadastrarNovoUsuario(nome, login, senha);
