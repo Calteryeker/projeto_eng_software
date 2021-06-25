@@ -4,8 +4,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.File;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,17 +25,26 @@ public class ControladorLoginTest {
     private ControladorLogin loginController;
     private ControladorDadosPersistentes userController;
     private Usuario signedUpUser;
+    private String path = ".\\localstorage\\usuarios.ser";
+
+    public Usuario fetchUser() {
+        List<Usuario> users = userController.getDadosPersistentes().getUsuarios();
+        for (Usuario user : users) {
+            if (user.getNome() == "Rodrigo" && user.getLogin() == "rodrigo") {
+                return user;
+            }
+        }
+        return null;
+    }
 
     @BeforeEach
     public void setUp() throws DadosNaoPreenchidosException, UsuarioJaCadastradoException {
         loginController = ControladorLogin.getInstance();
         userController = ControladorDadosPersistentes.getInstance();
-        userController.cadastrarUsuario("Rodrigo", "rodrigo", "rodrigo_pass");
-        List<Usuario> users = userController.getDadosPersistentes().getUsuarios();
-        for (Usuario user : users) {
-            if (user.getNome() == "Rodrigo" && user.getLogin() == "rodrigo") {
-                signedUpUser = user;
-            }
+        signedUpUser = fetchUser();
+        if (signedUpUser == null) {
+            userController.cadastrarUsuario("Rodrigo", "rodrigo", "rodrigo_pass");
+            signedUpUser = fetchUser();
         }
     }
 
@@ -78,5 +89,13 @@ public class ControladorLoginTest {
         assertEquals(signedUpUser.getLogin(), loggedUser.getLogin());
         assertEquals(signedUpUser.getSenha(), loggedUser.getSenha());
         assertNotNull(login);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        File file = new File(path);
+        if (file.isFile()) {
+            file.delete();
+        }
     }
 }

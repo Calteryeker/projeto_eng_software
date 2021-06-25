@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.File;
 import java.util.List;
 
 import controllers.ControladorDadosPersistentes;
@@ -12,6 +13,7 @@ import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.UsuarioJaCadastradoException;
 import model.Usuario;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,7 @@ import org.junit.jupiter.api.Test;
 public class ControladorDadosPersistentesTest {
 
     private ControladorDadosPersistentes controladorDadosPersistentes;
+    private String path = ".\\localstorage\\usuarios.ser";
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -81,5 +84,13 @@ public class ControladorDadosPersistentesTest {
     public void testGetDadosPersistentesInstance() {
         IDadosPersistentes dadosPersistentes = controladorDadosPersistentes.getDadosPersistentes();
         assertNotNull(dadosPersistentes);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        File file = new File(path);
+        if (file.isFile()) {
+            file.delete();
+        }
     }
 }
