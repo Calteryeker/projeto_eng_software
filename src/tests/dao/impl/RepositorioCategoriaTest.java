@@ -20,7 +20,7 @@ public class RepositorioCategoriaTest {
     private RepositorioCategoria repo;
     private String path;
     private String categoryName;
-    
+
     @BeforeEach
     public void setUp() {
         path = ".\\localstorage\\categorias.ser";
