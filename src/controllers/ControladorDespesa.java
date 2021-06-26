@@ -30,29 +30,28 @@ public class ControladorDespesa {
         return instance;
     }
 
-    public void criarDespesa(String nome, double valor, LocalDate data_criacao, Categoria categoria) throws DadosNaoPreenchidosException {
+    public Despesa criarDespesa(String nome, double valor, LocalDate data_criacao, Categoria categoria) throws DadosNaoPreenchidosException {
 
 
         if (nome == null || valor <= 0 || data_criacao == null || categoria == null) {
             throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
         } else {
-            repositorioDespesa.criarDespesa(nome, valor, data_criacao, categoria);
+            return repositorioDespesa.criarDespesa(nome, valor, data_criacao, categoria);
         }
-
     }
 
-    public void alterarDespesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria)
+    public Despesa alterarDespesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria)
             throws DadosNaoPreenchidosException, DespesaNaoEncontradaException {
 
         if (nome.equals(null) || valor <= 0 || data_criacao.equals(null) || categoria.equals(null)) {
             throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
         } else {
-            repositorioDespesa.editarDespesa(nome, idDespesa, valor, data_criacao, categoria);
+            return repositorioDespesa.editarDespesa(nome, idDespesa, valor, data_criacao, categoria);
         }
     }
 
-    public void removerDespesa(int idDespesa) throws DespesaNaoEncontradaException {
-        repositorioDespesa.removerDespesa(idDespesa);
+    public Despesa removerDespesa(int idDespesa) throws DespesaNaoEncontradaException {
+        return repositorioDespesa.removerDespesa(idDespesa);
     }
 
     public List<Despesa> visualizarDespesasPorCategoria(Categoria categoria) throws CategoriaNulaException {

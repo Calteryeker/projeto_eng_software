@@ -26,13 +26,15 @@ public class ControladorCategoria {
         return instance;
     }
 
-    public void criarCategoria(String nome) throws CategoriaJaCadastradaException {
+    public Categoria criarCategoria(String nome) throws CategoriaJaCadastradaException {
+
+        Categoria categoria = null;
         if (nome == null) {
             System.out.println("Categoria invalida");
         } else {
-            repositorioCategoria.criarCategoria(nome);
+            categoria = repositorioCategoria.criarCategoria(nome);
         }
-
+        return categoria;
     }
 
     public List<Categoria> getCategorias() {
