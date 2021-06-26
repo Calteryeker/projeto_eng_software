@@ -1,17 +1,19 @@
 package dao;
 
 import dao.impl.exceptions.CategoriaJaCadastradaException;
+import dao.impl.exceptions.CategoriaNaoEncontradaException;
+
 import java.util.List;
 import model.Categoria;
 
 
 public interface IRepositorioCategoria {
 
-  void criarCategoria(String nome) throws CategoriaJaCadastradaException;
+  Categoria criarCategoria(String nome) throws CategoriaJaCadastradaException;
 
-  void editarCategoria(String nome, int idCategoria);
+  Categoria editarCategoria(String nome, int idCategoria) throws CategoriaNaoEncontradaException;
 
-  void removerCategoria(int idCategoria);
+  Categoria removerCategoria(int idCategoria) throws CategoriaNaoEncontradaException;
 
   void setCategorias(List<Categoria> categorias);
 
