@@ -53,7 +53,7 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         }
 
         if (auxiliar != -1) {
-            altDespesa = new Despesa(nome, valor, data_criacao, categoria)
+            altDespesa = new Despesa(nome, valor, data_criacao, categoria);
             despesas.set(auxiliar, altDespesa);
         } else {
             throw new DespesaNaoEncontradaException("Despesa não encontrada!!");
