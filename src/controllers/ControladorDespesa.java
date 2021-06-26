@@ -33,7 +33,7 @@ public class ControladorDespesa {
     public void criarDespesa(String nome, double valor, LocalDate data_criacao, Categoria categoria) throws DadosNaoPreenchidosException {
 
 
-        if (nome.equals(null) || valor <= 0 || data_criacao.equals(null) || categoria.equals(null)) {
+        if (nome == null || valor <= 0 || data_criacao == null || categoria == null) {
             throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
         } else {
             repositorioDespesa.criarDespesa(nome, valor, data_criacao, categoria);
