@@ -2,6 +2,8 @@ package dao.impl;
 
 import dao.IRepositorioCategoria;
 import dao.impl.exceptions.CategoriaJaCadastradaException;
+import dao.impl.exceptions.CategoriaNaoEncontradaException;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class RepositorioCategoria implements IRepositorioCategoria {
   }
 
   @Override
-  public void criarCategoria(String nome) throws CategoriaJaCadastradaException {
+  public Categoria criarCategoria(String nome) throws CategoriaJaCadastradaException {
 
     int idAux = LocalDateTime.now().hashCode();
     Categoria categoriaAux = new Categoria(nome);
@@ -46,16 +48,52 @@ public class RepositorioCategoria implements IRepositorioCategoria {
       System.out.println("Categoria cadastrada com sucesso!!");
     }
     FileUtilRepository.saveFile(categorias, path);
+
+    return categoriaAux;
   }
 
   @Override
-  public void editarCategoria(String nome, int idCategoria) {
+  public Categoria editarCategoria(String nome, int idCategoria) throws CategoriaNaoEncontradaException {
+    int auxiliar = -1;
+        Categoria altCategoria = null;
 
+        for (int i = 0; i < categorias.size(); i++) {
+            if (categorias.get(i).getIdCategoria() == idCategoria) {
+                auxiliar = i;
+            }
+        }
+
+        if (auxiliar != -1) {
+            altCategoria = new Categoria(nome);
+            categorias.set(auxiliar, altCategoria);
+        } else {
+            throw new CategoriaNaoEncontradaException("Despesa não encontrada!!");
+        }
+
+        FileUtilRepository.saveFile(categorias, path);
+
+        return altCategoria;
   }
 
   @Override
-  public void removerCategoria(int idCategoria) {
+  public Categoria removerCategoria(int idCategoria) throws CategoriaNaoEncontradaException {
+    Categoria delCategoria = null;
+        int auxiliar = -1;
+        for (int i = 0; i < categorias.size(); i++) {
+            if (categorias.get(i).getIdCategoria() == idCategoria) {
+                auxiliar = i;
+                delCategoria = categorias.get(i);
+            }
+        }
+        if (auxiliar != -1) {
+            categorias.remove(auxiliar);
+        } else {
+            throw new CategoriaNaoEncontradaException("Despesa não encontrada!!");
+        }
 
+        FileUtilRepository.saveFile(categorias, path);
+
+        return delCategoria;
   }
 
   @Override
