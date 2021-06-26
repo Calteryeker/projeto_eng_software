@@ -1,6 +1,7 @@
 package controllers;
 
 import dao.IDadosPersistentes;
+import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.SenhaIncorretaException;
 import dao.impl.exceptions.UsuarioNaoEncontradoException;
 import model.Usuario;
@@ -21,7 +22,8 @@ public class ControladorLogin {
         return instance;
     }
 
-    public String login(String nome, String senha) throws SenhaIncorretaException, UsuarioNaoEncontradoException {
+    public String login(String nome, String senha)
+        throws SenhaIncorretaException, UsuarioNaoEncontradoException {
 
         List<Usuario> usuarios = ControladorDadosPersistentes.getInstance().getDadosPersistentes().getUsuarios();
         for (Usuario x : usuarios) {
