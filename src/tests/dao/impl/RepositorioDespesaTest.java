@@ -104,7 +104,7 @@ public class RepositorioDespesaTest {
 
     @AfterEach
     public void tearDown() {
-        File file = new File(".\\localstorage\\usuarios.ser");
+        File file = new File(".\\localstorage\\despesas.ser");
         if (file.isFile()) {
             file.delete();
         }
