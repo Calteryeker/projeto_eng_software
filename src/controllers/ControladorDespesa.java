@@ -19,7 +19,7 @@ public class ControladorDespesa {
     private static ControladorDespesa instance;
 
     public ControladorDespesa() {
-        this.repositorioDespesa = new RepositorioDespesa("./localstorage/despesas.ser");
+        this.repositorioDespesa = new RepositorioDespesa(".\\localstorage\\despesas.ser");
     }
 
     public static ControladorDespesa getInstance() {

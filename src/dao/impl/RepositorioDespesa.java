@@ -52,7 +52,6 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         if (auxiliar != -1) {
 
             despesas.set(auxiliar, new Despesa(nome, valor, data_criacao, categoria));
-            System.out.println("Despesa alterada com sucesso !!");
         } else {
             throw new DespesaNaoEncontradaException("Despesa não encontrada!!");
         }
@@ -70,7 +69,6 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         }
         if (auxiliar != -1) {
             despesas.remove(auxiliar);
-            System.out.print("Despesa removida !!");
         } else {
             throw new DespesaNaoEncontradaException("Despesa não encontrada!!");
         }

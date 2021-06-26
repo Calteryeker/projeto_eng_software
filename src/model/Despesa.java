@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
@@ -79,12 +81,15 @@ public class Despesa implements Serializable {
 
     @Override
     public String toString() {
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DecimalFormat df = new DecimalFormat("0.00");
+
         return "Despesa{" +
-                "Nome='" + nome + '\'' +
-                ", Id da Despesa=" + idDespesa +
-                ", Valor=" + valor +
-                ", Data de criação=" + data_criacao +
-                ", Categoria=" + categoria +
+                "Nome: " + nome +
+                ", Valor(R$): " + df.format(valor) +
+                ", Data de Criação: " + data_criacao.format(format) +
+                ", Categoria:" + categoria.getNome() +
                 '}';
     }
 }

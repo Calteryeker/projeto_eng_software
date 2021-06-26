@@ -1,23 +1,24 @@
-import controllers.ControladorDadosPersistentes;
-import controllers.ControladorLogin;
+
+import dao.impl.exceptions.CategoriaNulaException;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
-import dao.impl.exceptions.SenhaIncorretaException;
+import dao.impl.exceptions.DataDespesaInvalidaException;
+import dao.impl.exceptions.DespesaNaoEncontradaException;
+import dao.impl.exceptions.NomeCategoriaInvalidoException;
+import dao.impl.exceptions.NomeDespesaInvalidoException;
+import dao.impl.exceptions.NumeroDeCategoriaSelecionadaInvalidoException;
+import dao.impl.exceptions.NumeroDespesaSelecionadaInvalidoException;
 import dao.impl.exceptions.UsuarioJaCadastradoException;
-import dao.impl.exceptions.UsuarioNaoEncontradoException;
 
-import java.util.Scanner;
+import dao.impl.exceptions.ValorDespesaInvalidoException;
 
-import model.Usuario;
 import views.LoginViewController;
 
 public class Main {
 
-    public static void main(String[] args) throws DadosNaoPreenchidosException, UsuarioJaCadastradoException {
+    public static void main(String[] args)
+        throws DadosNaoPreenchidosException, UsuarioJaCadastradoException, NumeroDespesaSelecionadaInvalidoException, NomeCategoriaInvalidoException, ValorDespesaInvalidoException, CategoriaNulaException, DataDespesaInvalidaException, NumeroDeCategoriaSelecionadaInvalidoException, DespesaNaoEncontradaException, NomeDespesaInvalidoException {
 
-        LoginViewController loginViewController = LoginViewController.getInstance();
-
-        loginViewController.execute();
-
+        LoginViewController.getInstance().execute(false);
 
     }
 }

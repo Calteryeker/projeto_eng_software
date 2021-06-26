@@ -1,11 +1,20 @@
 package views;
 
+import controllers.ControladorCategoria;
 import controllers.ControladorDadosPersistentes;
 import controllers.ControladorLogin;
+import dao.impl.exceptions.CategoriaNulaException;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
+import dao.impl.exceptions.DataDespesaInvalidaException;
+import dao.impl.exceptions.DespesaNaoEncontradaException;
+import dao.impl.exceptions.NomeCategoriaInvalidoException;
+import dao.impl.exceptions.NomeDespesaInvalidoException;
+import dao.impl.exceptions.NumeroDeCategoriaSelecionadaInvalidoException;
+import dao.impl.exceptions.NumeroDespesaSelecionadaInvalidoException;
 import dao.impl.exceptions.SenhaIncorretaException;
 import dao.impl.exceptions.UsuarioJaCadastradoException;
 import dao.impl.exceptions.UsuarioNaoEncontradoException;
+import dao.impl.exceptions.ValorDespesaInvalidoException;
 import model.Usuario;
 
 import java.util.Scanner;
@@ -83,7 +92,8 @@ public class LoginViewController {
         ControladorDadosPersistentes.getInstance().cadastrarUsuario(nome, username, senha);
     }
 
-    public void execute() throws UsuarioJaCadastradoException, DadosNaoPreenchidosException {
+    public void execute(boolean logado)
+        throws UsuarioJaCadastradoException, DadosNaoPreenchidosException, NumeroDespesaSelecionadaInvalidoException, NumeroDeCategoriaSelecionadaInvalidoException, NomeCategoriaInvalidoException, ValorDespesaInvalidoException, CategoriaNulaException, DataDespesaInvalidaException, DespesaNaoEncontradaException, NomeDespesaInvalidoException {
 
         Scanner sc = new Scanner(System.in);
 
@@ -94,7 +104,6 @@ public class LoginViewController {
         int opcaoMenuCat = 0;
         int opcaoMenuMet = 0;
         int aux = 0;
-        boolean logado = false;
         boolean admDespesas = false;
         boolean admMetas = false;
         boolean admCategorias = false;
@@ -102,20 +111,24 @@ public class LoginViewController {
 
         while (opcaoMenuP != 3) {
 
-            System.out.println();
-            System.out.println("Digite a Opção: ");
-            System.out.println("1 - Cadastrar Novo Usuario;");
-            System.out.println("2 - Logar;");
-            System.out.println("3 - Sair do Sistema.");
+            if(!logado) {
+                System.out.println();
+                System.out.println("Digite a Opção: ");
+                System.out.println("1 - Cadastrar Novo Usuario;");
+                System.out.println("2 - Logar;");
+                System.out.println("3 - Sair do Sistema.");
 
-            opcaoMenuP = sc.nextInt();
+                opcaoMenuP = sc.nextInt();
 
-            sc.nextLine();
+                sc.nextLine();
 
-            if (opcaoMenuP == 1) {
-                Cadastro();
-            } else if (opcaoMenuP == 2) {
-                logado = Login();
+                if (opcaoMenuP == 1) {
+                    Cadastro();
+                } else if (opcaoMenuP == 2) {
+                    logado = Login();
+                } else {
+                    return;
+                }
             }
 
             while (logado) {
@@ -129,7 +142,7 @@ public class LoginViewController {
                 System.out.println();
                 System.out.println("Digite a Opção: ");
                 System.out.println("1 - Administrar Despesas;");
-                System.out.println("2 - Administrar Categorias;");
+                System.out.println("2 - Criar Uma Categoria;");
                 System.out.println("3 - Administrar Metas;");
                 System.out.println("4 - Logout.");
 
@@ -139,26 +152,24 @@ public class LoginViewController {
 
                 if (opcaoMenu2 == 1) {
 
-                    admDespesas = true;
 
-                    while (admDespesas) {
+                    if(ControladorCategoria.getInstance().getCategorias() == null || ControladorCategoria.getInstance().getCategorias().isEmpty()) {
+
+                        String CSI = "\u001B[";
+
                         System.out.println();
-                        System.out.println("Digite a Opção: ");
-                        System.out.println("1 - Adicionar Despesa;");
-                        System.out.println("2 - Atualizar Despesa;");
-                        System.out.println("3 - Remover Despesa;");
-                        System.out.println("4 - Voltar.");
+                        System.out.print(CSI + "31" + "m");
+                        System.out.println("Não Existem Categorias No Sistema Para Administrar Despesas, Operação Cancelada");
+                        System.out.print(CSI + "m");
 
-                        opcaoMenuDes = sc.nextInt();
-
-                        sc.nextLine();
+                    } else{
+                        DespesaViewController.getInstance().execute(1);
                     }
                 } else if (opcaoMenu2 == 2) {
-
+                        DespesaViewController.getInstance().execute(2);
                 } else if (opcaoMenu2 == 3) {
 
                 } else if (opcaoMenu2 == 4) {
-                    opcaoMenu2 = 0;
                     aux = 0;
                     logado = false;
                 }

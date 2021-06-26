@@ -20,23 +20,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d810210-c495-46cd-a7b2-173df2308fc0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/controllers/ControladorCategoria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/CategoriaNulaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/DataDespesaInvalidaException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/NomeCategoriaInvalidoException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/NomeDespesaInvalidoException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/NumeroDeCategoriaSelecionadaInvalidoException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/NumeroDespesaSelecionadaInvalidoException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dao/impl/exceptions/ValorDespesaInvalidoException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/DespesaViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/localstorage/usuarios.ser" beforeDir="false" afterPath="$PROJECT_DIR$/localstorage/usuarios.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorDadosPersistentes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorDadosPersistentes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/DadosPersistentes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/DadosPersistentes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorCategoria.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorCategoria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorDespesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorDespesa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/controllers/ControladorLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/RepositorioDespesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/dao/impl/RepositorioDespesa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Categoria.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Categoria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Despesa.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/model/Despesa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/views/DespesaViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/views/DespesaViewController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/projeto_eng_software/views/LoginViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto_eng_software/views/LoginViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/ControladorDadosPersistentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ControladorDadosPersistentes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/ControladorCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ControladorCategoria.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/ControladorDespesa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ControladorDespesa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/impl/DadosPersistentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/impl/DadosPersistentes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/ControladorLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ControladorLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/impl/RepositorioDespesa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/impl/RepositorioDespesa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Categoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Despesa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Despesa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/DespesaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/DespesaViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/LoginViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/LoginViewController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,14 +70,26 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="dao.impl.exceptions" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="projeto_eng_software" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="teste" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="teste" />
       <module name="projeto_eng_software" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -84,6 +98,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.teste" />
       </list>
     </recent_temporary>
   </component>
@@ -109,5 +124,35 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="440" y="94" key="#Project_Structure" timestamp="1624680564484">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1624680564484" />
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1624684860614">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1624684860614" />
+    <state x="690" y="295" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1624686228180">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="295" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1624686228180" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1624694459066">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1624694459066" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1624694459066">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1624694459066" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1624694459066">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1624694459066" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1624694459066">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1624694459066" />
   </component>
 </project>

@@ -12,6 +12,8 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
+    public Categoria() {}
+
     public String getNome() {
         return nome;
     }

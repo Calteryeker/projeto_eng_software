@@ -1,5 +1,9 @@
 package controllers;
 
+import dao.IRepositorioCategoria;
+import dao.impl.RepositorioCategoria;
+import dao.impl.RepositorioDespesa;
+import dao.impl.exceptions.CategoriaJaCadastradaException;
 import model.Categoria;
 
 import java.util.ArrayList;
@@ -8,10 +12,10 @@ import java.util.List;
 public class ControladorCategoria {
 
     private static ControladorCategoria instance;
-    private List<Categoria> categorias = new ArrayList<>();
+    private IRepositorioCategoria repositorioCategoria;
 
     private ControladorCategoria() {
-
+        this.repositorioCategoria = new RepositorioCategoria(".\\localstorage\\categorias.ser");
     }
 
     public static ControladorCategoria getInstance() {
@@ -22,20 +26,20 @@ public class ControladorCategoria {
         return instance;
     }
 
-    public void criarCategoria(String nome) {
+    public void criarCategoria(String nome) throws CategoriaJaCadastradaException {
         if (nome == null) {
-            System.out.println("String null");
+            System.out.println("Categoria invalida");
         } else {
-            categorias.add(new Categoria(nome));
+            repositorioCategoria.criarCategoria(nome);
         }
 
     }
 
     public List<Categoria> getCategorias() {
-        return categorias;
+        return repositorioCategoria.getCategorias();
     }
 
     public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
+        repositorioCategoria.setCategorias(categorias);
     }
 }
