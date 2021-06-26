@@ -28,7 +28,7 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         }
     }
 
-    public void criarDespesa(String nome, double valor, LocalDate data_criacao, Categoria categoria) {
+    public Despesa criarDespesa(String nome, double valor, LocalDate data_criacao, Categoria categoria) {
 
         Despesa auxDespesa = new Despesa(nome, valor, data_criacao, categoria);
 
@@ -37,11 +37,14 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         despesas.add(auxDespesa);
 
         FileUtilRepository.saveFile(despesas, path);
+
+        return auxDespesa;
     }
 
-    public void editarDespesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria) throws DespesaNaoEncontradaException {
+    public Despesa editarDespesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria) throws DespesaNaoEncontradaException {
 
         int auxiliar = -1;
+        Despesa altDespesa = null;
 
         for (int i = 0; i < despesas.size(); i++) {
             if (despesas.get(i).getOrdem() == idDespesa) {
@@ -50,21 +53,25 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         }
 
         if (auxiliar != -1) {
-
-            despesas.set(auxiliar, new Despesa(nome, valor, data_criacao, categoria));
+            altDespesa = new Despesa(nome, valor, data_criacao, categoria)
+            despesas.set(auxiliar, altDespesa);
         } else {
             throw new DespesaNaoEncontradaException("Despesa não encontrada!!");
         }
 
         FileUtilRepository.saveFile(despesas, path);
+
+        return altDespesa;
     }
 
-    public void removerDespesa(int idDespesa) throws DespesaNaoEncontradaException {
+    public Despesa removerDespesa(int idDespesa) throws DespesaNaoEncontradaException {
 
+        Despesa delDespesa = null;
         int auxiliar = -1;
         for (int i = 0; i < despesas.size(); i++) {
             if (despesas.get(i).getOrdem() == idDespesa) {
                 auxiliar = i;
+                delDespesa = despesas.get(i);
             }
         }
         if (auxiliar != -1) {
@@ -74,6 +81,8 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         }
 
         FileUtilRepository.saveFile(despesas, path);
+
+        return delDespesa;
     }
 
     public void setDespesas(List<Despesa> despesas) {
