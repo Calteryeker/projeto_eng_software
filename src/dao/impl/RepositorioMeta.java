@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.impl.exceptions.MetaJaCadastradaException;
 import dao.impl.exceptions.MetaNaoEncontradaException;
 
 import java.io.Serializable;
@@ -18,18 +19,25 @@ public class RepositorioMeta {
 
         this.path = path;
         this.metas = new ArrayList<>();
-    
-        Object elementsList = FileUtilRepository.readFile(this.path);
-        if (elementsList != null && elementsList instanceof List<?>){
-          this.metas = (List<Meta>) elementsList;
-        }
-        
-      }
 
-    public Meta criarMeta(double valor, String descricao) {
-        Meta auxMeta = new Meta(valor, descricao);
+        Object elementsList = FileUtilRepository.readFile(this.path);
+        if (elementsList != null && elementsList instanceof List<?>) {
+            this.metas = (List<Meta>) elementsList;
+        }
+
+    }
+
+    public Meta criarMeta(double valor, String descricao, LocalDate data) throws MetaJaCadastradaException {
+        Meta auxMeta = new Meta(valor, descricao, data);
+
+        for (Meta meta : metas) {
+            if (meta.getData_criacao().getMonth().equals(data.getMonth())) {
+                throw new MetaJaCadastradaException("Meta já Cadastrada");
+            }
+        }
 
         metas.add(auxMeta);
+        System.out.println("Meta cadastrada com sucesso!!");
 
         FileUtilRepository.saveFile(metas, path);
 
@@ -96,6 +104,4 @@ public class RepositorioMeta {
         }
     }
 
-
 }
-

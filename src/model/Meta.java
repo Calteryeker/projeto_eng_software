@@ -22,6 +22,13 @@ public class Meta implements Serializable {
         data_criacao = LocalDate.now();
     }
 
+    public Meta(double valor, String descricao, LocalDate data) {
+
+        this.valor = valor;
+        this.descricao = descricao;
+        data_criacao = data;
+    }
+
     public double getValor() {
         return valor;
     }
