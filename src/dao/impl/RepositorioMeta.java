@@ -70,7 +70,7 @@ public class RepositorioMeta implements IRepositorioMeta {
         return altMeta;
     }
 
-    public Meta removerMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException {
+    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException {
 
         Meta delMeta = null;
         int auxiliar = -1;
