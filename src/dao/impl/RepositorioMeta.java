@@ -3,52 +3,82 @@ package dao.impl;
 import dao.impl.exceptions.MetaNaoEncontradaException;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Meta;
 
 public class RepositorioMeta {
 
-    List<Meta> metas = new ArrayList<>();
+    private List<Meta> metas = new ArrayList<>();
+    private String path;
 
-    public void criarMeta(double valor, String descricao) {
-        metas.add(new Meta(valor, descricao));
+    public RepositorioMeta(String path) {
+
+        this.path = path;
+        this.metas = new ArrayList<>();
+    
+        Object elementsList = FileUtilRepository.readFile(this.path);
+        if (elementsList != null && elementsList instanceof List<?>){
+          this.metas = (List<Meta>) elementsList;
+        }
+        
+      }
+
+    public Meta criarMeta(double valor, String descricao) {
+        Meta auxMeta = new Meta(valor, descricao);
+
+        metas.add(auxMeta);
+
+        FileUtilRepository.saveFile(metas, path);
+
+        return auxMeta;
     }
 
-    public void alterarMeta(double valor, String descricao) throws MetaNaoEncontradaException {
+    public Meta alterarMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException {
 
+        Meta altMeta = null;
         int auxiliar = -1;
+
         for (int i = 0; i < metas.size(); i++) {
-            if (metas.get(i).getDescricao().equals(descricao)) {
+            if (metas.get(i).getData_criacao().equals(data)) {
                 auxiliar = i;
+                altMeta = metas.get(i);
             }
         }
 
         if (auxiliar != -1) {
-
-            metas.set(auxiliar, new Meta(valor, descricao));
-            System.out.println("Meta alterada com sucesso !!");
+            altMeta = new Meta()
+            altMeta.setDescricao(descricao);
+            altMeta.setValor(valor);
+            metas.set(auxiliar, altMeta);
         } else {
-            throw new MetaNaoEncontradaException("Despesa não encontrada!!");
+            throw new MetaNaoEncontradaException("Meta não encontrada!!");
         }
+
+        FileUtilRepository.saveFile(metas, path);
+
+        return altMeta;
     }
 
-    public void removerMeta(double valor, String descricao) throws MetaNaoEncontradaException {
+    public Meta removerMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException {
 
+        Meta delMeta = null;
         int auxiliar = -1;
         for (int i = 0; i < metas.size(); i++) {
-            if (metas.get(i).getDescricao().equals(descricao)) {
+            if (metas.get(i).getData_criacao().equals(data)) {
                 auxiliar = i;
+                delMeta = metas.get(i);
             }
         }
-
         if (auxiliar != -1) {
-
             metas.remove(auxiliar);
-            System.out.println("Meta removida com sucesso !!");
         } else {
             throw new MetaNaoEncontradaException("Despesa não encontrada!!");
         }
+
+        return delMeta;
     }
 
     public void setMetas(List<Meta> metas) {
