@@ -49,7 +49,7 @@ public class RepositorioMeta {
         }
 
         if (auxiliar != -1) {
-            altMeta = new Meta()
+            altMeta = new Meta();
             altMeta.setDescricao(descricao);
             altMeta.setValor(valor);
             metas.set(auxiliar, altMeta);
@@ -75,7 +75,7 @@ public class RepositorioMeta {
         if (auxiliar != -1) {
             metas.remove(auxiliar);
         } else {
-            throw new MetaNaoEncontradaException("Despesa não encontrada!!");
+            throw new MetaNaoEncontradaException("Meta não encontrada!!");
         }
 
         return delMeta;
