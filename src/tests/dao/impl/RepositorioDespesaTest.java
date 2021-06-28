@@ -102,6 +102,15 @@ public class RepositorioDespesaTest {
         assertEquals(expense, list.get(0));
     }
 
+    @Test
+    @DisplayName("Create CSV file should work")
+    public void testCreateFileSucceeds() {
+        expenseRepo.criarDespesa("Viagem para recife", 245d, localDate, category);
+        File csv = expenseRepo.gerarCSV("./file.csv");
+        System.out.println(System.getProperty("user.dir"));
+        assertTrue(csv.exists() && csv.isFile());
+    }
+
     @AfterEach
     public void tearDown() {
         File file = new File(".\\localstorage\\despesas.ser");
