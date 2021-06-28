@@ -3,6 +3,10 @@ package dao.impl;
 import dao.IRepositorioDespesa;
 import dao.impl.exceptions.DespesaNaoEncontradaException;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,13 +21,13 @@ public class RepositorioDespesa implements IRepositorioDespesa {
     private List<Despesa> despesas;
     private String path;
 
-    public RepositorioDespesa (String path){
+    public RepositorioDespesa(String path) {
 
         this.path = path;
         this.despesas = new ArrayList<>();
 
         Object elementsList = FileUtilRepository.readFile(this.path);
-        if (elementsList != null && elementsList instanceof List<?>){
+        if (elementsList != null && elementsList instanceof List<?>) {
             this.despesas = (List<Despesa>) elementsList;
         }
     }
@@ -41,7 +45,8 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         return auxDespesa;
     }
 
-    public Despesa editarDespesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria) throws DespesaNaoEncontradaException {
+    public Despesa editarDespesa(String nome, int idDespesa, double valor, LocalDate data_criacao, Categoria categoria)
+            throws DespesaNaoEncontradaException {
 
         int auxiliar = -1;
         Despesa altDespesa = null;
@@ -119,5 +124,34 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         return despesasListaAuxiliar;
     }
 
+    public File gerarCSV(String path) {
+        File csv = new File(path);
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(csv))) {
+            List<String> linhas = gerarLinhasCSV(despesas);
+            for (String linha : linhas) {
+                bufferedWriter.write(linha);
+                bufferedWriter.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return csv;
+    }
+
+    private List<String> gerarLinhasCSV(List<Despesa> despesas) {
+        List<String> linhas = new ArrayList<>();
+        for (Despesa despesa : despesas) {
+            String linha = despesa.getOrdem() 
+                + ", " + despesa.getNome() 
+                + ", " + despesa.getValor() 
+                + ", " + despesa.getData_criacao()
+                + ", " + despesa.getCategoria().getIdCategoria()
+                + ", " + despesa.getCategoria().getNome();
+            linhas.add(linha);
+        }
+        return linhas;
+    }
 
 }

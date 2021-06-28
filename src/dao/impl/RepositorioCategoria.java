@@ -67,7 +67,7 @@ public class RepositorioCategoria implements IRepositorioCategoria {
             altCategoria = new Categoria(nome);
             categorias.set(auxiliar, altCategoria);
         } else {
-            throw new CategoriaNaoEncontradaException("Despesa não encontrada!!");
+            throw new CategoriaNaoEncontradaException("Categoria não encontrada!!");
         }
 
         FileUtilRepository.saveFile(categorias, path);
@@ -88,7 +88,7 @@ public class RepositorioCategoria implements IRepositorioCategoria {
         if (auxiliar != -1) {
             categorias.remove(auxiliar);
         } else {
-            throw new CategoriaNaoEncontradaException("Despesa não encontrada!!");
+            throw new CategoriaNaoEncontradaException("Categoria não encontrada!!");
         }
 
         FileUtilRepository.saveFile(categorias, path);

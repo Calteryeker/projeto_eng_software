@@ -1,15 +1,16 @@
 package dao.impl;
 
+import dao.IRepositorioMeta;
+import dao.impl.exceptions.MetaJaCadastradaException;
 import dao.impl.exceptions.MetaNaoEncontradaException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Meta;
 
-public class RepositorioMeta {
+public class RepositorioMeta implements IRepositorioMeta {
 
     private List<Meta> metas = new ArrayList<>();
     private String path;
@@ -18,18 +19,25 @@ public class RepositorioMeta {
 
         this.path = path;
         this.metas = new ArrayList<>();
-    
-        Object elementsList = FileUtilRepository.readFile(this.path);
-        if (elementsList != null && elementsList instanceof List<?>){
-          this.metas = (List<Meta>) elementsList;
-        }
-        
-      }
 
-    public Meta criarMeta(double valor, String descricao) {
-        Meta auxMeta = new Meta(valor, descricao);
+        Object elementsList = FileUtilRepository.readFile(this.path);
+        if (elementsList != null && elementsList instanceof List<?>) {
+            this.metas = (List<Meta>) elementsList;
+        }
+
+    }
+
+    public Meta criarMeta(double valor, String descricao, LocalDate data) throws MetaJaCadastradaException {
+        Meta auxMeta = new Meta(valor, descricao, data);
+
+        for (Meta meta : metas) {
+            if (meta.getData_criacao().getMonth().equals(data.getMonth())) {
+                throw new MetaJaCadastradaException("Meta já Cadastrada");
+            }
+        }
 
         metas.add(auxMeta);
+        System.out.println("Meta cadastrada com sucesso!!");
 
         FileUtilRepository.saveFile(metas, path);
 
@@ -62,7 +70,7 @@ public class RepositorioMeta {
         return altMeta;
     }
 
-    public Meta removerMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException {
+    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException {
 
         Meta delMeta = null;
         int auxiliar = -1;
@@ -96,6 +104,4 @@ public class RepositorioMeta {
         }
     }
 
-
 }
-
