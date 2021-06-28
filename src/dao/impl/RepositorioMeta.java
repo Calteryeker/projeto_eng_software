@@ -1,16 +1,16 @@
 package dao.impl;
 
+import dao.IRepositorioMeta;
 import dao.impl.exceptions.MetaJaCadastradaException;
 import dao.impl.exceptions.MetaNaoEncontradaException;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Meta;
 
-public class RepositorioMeta {
+public class RepositorioMeta implements IRepositorioMeta {
 
     private List<Meta> metas = new ArrayList<>();
     private String path;
