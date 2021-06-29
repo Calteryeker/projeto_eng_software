@@ -1,13 +1,20 @@
 package views;
 
+import controllers.ControladorMeta;
 import dao.impl.RepositorioMeta;
+import dao.impl.exceptions.DadosNaoPreenchidosException;
+import dao.impl.exceptions.MetaJaCadastradaException;
+import dao.impl.exceptions.MetaNaoEncontradaException;
 import model.Meta;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class MetasViewController {
 
     private static MetasViewController instance;
+
 
     private MetasViewController() {
 
@@ -22,25 +29,76 @@ public class MetasViewController {
     }
 
 
-    public void criarMeta(double valor, LocalDate data) {
-        //Chamando função do ControladorMetas de criação de meta
-
+    public Meta criarMeta(double valor, String descricao, LocalDate data) throws DadosNaoPreenchidosException, MetaJaCadastradaException {
+        return ControladorMeta.getInstance().criarMeta(valor, descricao, data);
     }
 
-    public void removerMeta() {
-        //Chamando função do ControladorMetas de remoção de meta
+    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
+        return ControladorMeta.getInstance().removerMeta(data);
     }
 
-    public void alterarMeta() {
-        //Chamando função do ControladorMetas de alteração de meta
+    public Meta alterarMeta(double valor, String descricao, LocalDate data) {
+        return alterarMeta(valor, descricao, data);
     }
 
     public void visualizarMetas() {
-        //Chamando função do ControladorMetas de lista de metas
+        ControladorMeta.getInstance().visualizarHistoricoDeMetas();
     }
 
-    public void execute(double valor, LocalDate data) {
+    public Meta exibirMenuAdicionarMetas(Scanner scanner) throws DadosNaoPreenchidosException, MetaJaCadastradaException {
 
+        System.out.println("Digite um valor para a nova meta: ");
+        double valorMeta = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.println("Digite a descrição da nova meta(opcional): ");
+        String descricaoMeta = scanner.nextLine();
+        System.out.println("Digite a data da nova meta: dd/MM/yyyy");
+        String dataMeta = scanner.nextLine();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(dataMeta, format);
+
+        return MetasViewController.getInstance().criarMeta(valorMeta, descricaoMeta, localDate);
+    }
+
+    public Meta exibirMenuRemoverMetas(Scanner scanner) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
+
+        System.out.println("Digite a Data Onde se Encontra a Meta Para Remoção: dd/MM/yyyy");
+        String dataMeta = scanner.nextLine();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(dataMeta, format);
+        System.out.println(localDate.toString());
+        return removerMeta(localDate);
+    }
+
+
+    public void execute() throws DadosNaoPreenchidosException, MetaJaCadastradaException, MetaNaoEncontradaException {
+
+        Scanner sc = new Scanner(System.in);
+        int opcaoMenuP = 0;
+
+        while (opcaoMenuP != 4) {
+
+            System.out.println();
+            System.out.println("Digite a Opção: ");
+            System.out.println("1 - Criar Nova Meta;");
+            System.out.println("2 - Remover Uma Meta;");
+            System.out.println("3 - Alterar Uma Meta;");
+            System.out.println("4 - Visualizar Metas.");
+
+            opcaoMenuP = Integer.parseInt(sc.nextLine());
+            Meta metaAuxiliar = null;
+
+            if (opcaoMenuP == 1) {
+                metaAuxiliar = exibirMenuAdicionarMetas(sc);
+            } else if (opcaoMenuP == 2) {
+                metaAuxiliar = exibirMenuRemoverMetas(sc);
+
+            } else if (opcaoMenuP == 3) {
+
+            }
+
+        }
+        sc.close();
     }
 
 
