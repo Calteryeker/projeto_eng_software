@@ -7,12 +7,25 @@ public class Categoria implements Serializable {
 
     private String nome;
     private int idCategoria;
+    private Usuario usuario;
 
     public Categoria(String nome) {
         this.nome = nome;
+        usuario = new Usuario("Admin", "admin", "adminpass");
     }
 
-    public Categoria() {}
+    public Categoria(String nome, Usuario usuario) {
+        this.nome = nome;
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public String getNome() {
         return nome;
