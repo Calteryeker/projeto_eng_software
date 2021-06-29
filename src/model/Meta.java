@@ -10,6 +10,7 @@ public class Meta implements Serializable {
     private double valor;
     private String descricao;
     private LocalDate data_criacao;
+    private Usuario usuario;
 
     public Meta() {
         data_criacao = LocalDate.now();
@@ -20,6 +21,7 @@ public class Meta implements Serializable {
         this.valor = valor;
         this.descricao = descricao;
         data_criacao = LocalDate.now();
+        usuario = new Usuario("Admin", "admin", "adminpass");
     }
 
     public Meta(double valor, String descricao, LocalDate data) {
@@ -27,6 +29,23 @@ public class Meta implements Serializable {
         this.valor = valor;
         this.descricao = descricao;
         data_criacao = data;
+        usuario = new Usuario("Admin", "admin", "adminpass");
+    }
+
+    public Meta(double valor, String descricao, LocalDate data, Usuario usuario) {
+
+        this.valor = valor;
+        this.descricao = descricao;
+        data_criacao = data;
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public double getValor() {
