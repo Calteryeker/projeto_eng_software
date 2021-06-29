@@ -124,8 +124,8 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         return despesasListaAuxiliar;
     }
 
-    public File gerarCSV(String path) {
-        File csv = new File(path);
+    public File gerarCSV(String name) {
+        File csv = new File(".\\localstorage\\" + name + ".csv");
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(csv))) {
             List<String> linhas = gerarLinhasCSV(despesas);
@@ -142,6 +142,7 @@ public class RepositorioDespesa implements IRepositorioDespesa {
 
     private List<String> gerarLinhasCSV(List<Despesa> despesas) {
         List<String> linhas = new ArrayList<>();
+        linhas.add("id, nome, valor, criada_em, id_categoria, nome_categoria");
         for (Despesa despesa : despesas) {
             String linha = despesa.getOrdem() 
                 + ", " + despesa.getNome() 
