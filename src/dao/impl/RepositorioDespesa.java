@@ -124,8 +124,8 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         return despesasListaAuxiliar;
     }
 
-    public File gerarCSV(String path) {
-        File csv = createFile(path);
+    public File gerarCSV(String name) {
+        File csv = new File(".\\localstorage\\" + name + ".csv");
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(csv))) {
             List<String> linhas = gerarLinhasCSV(despesas);
@@ -138,19 +138,6 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         }
 
         return csv;
-    }
-
-    private File createFile(String path) {
-        File file = new File(path);
-        boolean success = file.mkdirs();
-        
-        if (success) {
-            System.out.println("O arquivo foi criado corretamente.");
-        } else {
-            System.out.println("Não foi possível criar o arquivo especificado.");
-        }
-
-        return file;
     }
 
     private List<String> gerarLinhasCSV(List<Despesa> despesas) {
