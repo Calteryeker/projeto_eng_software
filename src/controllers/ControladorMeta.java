@@ -57,7 +57,7 @@ public class ControladorMeta {
         if (!validarDados(valor, data)) {
             throw new DadosNaoPreenchidosException("Os Dados Não Foram Preenchidos Corretamente!!");
         } else {
-            return alterarMeta(valor, descricao, data);
+            return repositorioMeta.alterarMeta(valor, descricao, data);
         }
     }
 
@@ -73,10 +73,7 @@ public class ControladorMeta {
     }
 
     public void visualizarHistoricoDeMetas() {
-
-        for (Meta x : repositorioMeta.getMetas()) {
-            System.out.println(x);
-        }
+        repositorioMeta.visualizarHistoricoDeMetas();
     }
 
     public void setMetas(List<Meta> metas) {

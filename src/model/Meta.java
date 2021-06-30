@@ -84,9 +84,9 @@ public class Meta implements Serializable {
     @Override
     public String toString() {
         return "Meta{" +
-                "Valor=" + valor +
-                ", Descrição='" + descricao + '\'' +
-                ", Data de criação=" + data_criacao +
+                "Valor= " + valor +
+                ", Descrição= '" + descricao + '\'' +
+                ", Data de criação= " + data_criacao +
                 '}';
     }
 }

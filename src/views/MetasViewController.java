@@ -37,8 +37,8 @@ public class MetasViewController {
         return ControladorMeta.getInstance().removerMeta(data);
     }
 
-    public Meta alterarMeta(double valor, String descricao, LocalDate data) {
-        return alterarMeta(valor, descricao, data);
+    public Meta alterarMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
+        return ControladorMeta.getInstance().alterarMeta(valor, descricao, data);
     }
 
     public void visualizarMetas() {
@@ -52,22 +52,38 @@ public class MetasViewController {
         scanner.nextLine();
         System.out.println("Digite a descrição da nova meta(opcional): ");
         String descricaoMeta = scanner.nextLine();
-        System.out.println("Digite a data da nova meta: dd/MM/yyyy");
+        System.out.println("Digite a data da nova meta: dd-MM-yyyy");
         String dataMeta = scanner.nextLine();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.parse(dataMeta, format);
 
-        return MetasViewController.getInstance().criarMeta(valorMeta, descricaoMeta, localDate);
+        return criarMeta(valorMeta, descricaoMeta, localDate);
     }
 
     public Meta exibirMenuRemoverMetas(Scanner scanner) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
 
-        System.out.println("Digite a Data Onde se Encontra a Meta Para Remoção: dd/MM/yyyy");
+        System.out.println("Digite a Data Onde se Encontra a Meta Para Remoção: dd-MM-yyyy");
         String dataMeta = scanner.nextLine();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.parse(dataMeta, format);
-        System.out.println(localDate.toString());
+
         return removerMeta(localDate);
+    }
+
+    public Meta exibirMenuAlterarMeta(Scanner scanner) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
+
+        System.out.println("Digite Um Novo Valor Para a Meta: ");
+        double valorMeta = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.println("Digite Uma Nova descrição Para a Meta(opcional): ");
+        String descricaoMeta = scanner.nextLine();
+        System.out.println("Digite a Data da Meta que Será Alterada: dd-MM-yyyy");
+        String dataMeta = scanner.nextLine();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(dataMeta, format);
+
+        return alterarMeta(valorMeta, descricaoMeta, localDate);
+
     }
 
 
@@ -76,7 +92,7 @@ public class MetasViewController {
         Scanner sc = new Scanner(System.in);
         int opcaoMenuP = 0;
 
-        while (opcaoMenuP != 4) {
+        while (opcaoMenuP != 5) {
 
             System.out.println();
             System.out.println("Digite a Opção: ");
@@ -94,7 +110,9 @@ public class MetasViewController {
                 metaAuxiliar = exibirMenuRemoverMetas(sc);
 
             } else if (opcaoMenuP == 3) {
-
+                metaAuxiliar = exibirMenuAlterarMeta(sc);
+            } else if (opcaoMenuP == 4) {
+                visualizarMetas();
             }
 
         }
