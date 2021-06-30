@@ -2,7 +2,6 @@ package dao;
 
 import dao.impl.exceptions.DespesaNaoEncontradaException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import model.Categoria;
 import model.Despesa;

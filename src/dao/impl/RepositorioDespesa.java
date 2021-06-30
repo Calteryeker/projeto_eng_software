@@ -14,9 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Categoria;
 import model.Despesa;
-import model.Usuario;
 
-public class RepositorioDespesa implements IRepositorioDespesa {
+public class RepositorioDespesa implements IRepositorioDespesa, Serializable {
 
     private List<Despesa> despesas;
     private String path;
@@ -90,6 +89,10 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         return delDespesa;
     }
 
+    public String getPath() {
+        return this.path;
+    }
+
     public void setDespesas(List<Despesa> despesas) {
         this.despesas = despesas;
     }
@@ -144,12 +147,9 @@ public class RepositorioDespesa implements IRepositorioDespesa {
         List<String> linhas = new ArrayList<>();
         linhas.add("id, nome, valor, criada_em, id_categoria, nome_categoria");
         for (Despesa despesa : despesas) {
-            String linha = despesa.getOrdem() 
-                + ", " + despesa.getNome() 
-                + ", " + despesa.getValor() 
-                + ", " + despesa.getData_criacao()
-                + ", " + despesa.getCategoria().getIdCategoria()
-                + ", " + despesa.getCategoria().getNome();
+            String linha = despesa.getOrdem() + ", " + despesa.getNome() + ", " + despesa.getValor() + ", "
+                    + despesa.getData_criacao() + ", " + despesa.getCategoria().getIdCategoria() + ", "
+                    + despesa.getCategoria().getNome();
             linhas.add(linha);
         }
         return linhas;
