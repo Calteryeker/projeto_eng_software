@@ -1,7 +1,5 @@
 package controllers;
 
-import dao.IDadosPersistentes;
-import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.SenhaIncorretaException;
 import dao.impl.exceptions.UsuarioNaoEncontradoException;
 import model.Usuario;

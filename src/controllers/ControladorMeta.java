@@ -2,8 +2,6 @@ package controllers;
 
 
 import dao.IRepositorioMeta;
-import dao.impl.DadosPersistentes;
-import dao.impl.RepositorioMeta;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.MetaJaCadastradaException;
 import model.Meta;
@@ -15,16 +13,13 @@ public class ControladorMeta {
     private IRepositorioMeta repositorioMeta;
     private static ControladorMeta instance;
 
-    public ControladorMeta() {
-
-        this.repositorioMeta = new RepositorioMeta(".\\localstorage\\metas.ser");
-
+    private ControladorMeta(IRepositorioMeta repoMeta) {
     }
 
-    public static ControladorMeta getInstance() {
+    public static ControladorMeta getInstance(IRepositorioMeta repoMeta) {
 
         if (instance == null) {
-            instance = new ControladorMeta();
+            instance = new ControladorMeta(repoMeta);
         }
         return instance;
     }

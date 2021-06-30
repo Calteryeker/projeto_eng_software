@@ -4,6 +4,7 @@ import dao.IDadosPersistentes;
 import dao.impl.DadosPersistentes;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.UsuarioJaCadastradoException;
+import model.Usuario;
 
 public class ControladorDadosPersistentes {
 
@@ -33,5 +34,9 @@ public class ControladorDadosPersistentes {
 
     public IDadosPersistentes getDadosPersistentes() {
         return dadosPersistentes;
+    }
+
+    public Usuario buscarUsuario(String login) {
+        return ((DadosPersistentes) dadosPersistentes).buscarUsuario(login);
     }
 }
