@@ -76,7 +76,7 @@ public class DadosPersistentes implements IDadosPersistentes {
         if (usuarioDel != null) {
             usuarios.remove(usuarioDel);
         } else {
-            throw new UsuarioNaoEncontradoException("Despesa não encontrada!!");
+            throw new UsuarioNaoEncontradoException("Usuario não encontrado!!");
         }
 
         FileUtilRepository.saveFile(usuarios, path);
@@ -92,7 +92,7 @@ public class DadosPersistentes implements IDadosPersistentes {
 
     public Usuario buscarUsuario(String login) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getLogin() == login) {
+            if (usuario.getLogin().equals(login)) {
                 return usuario;
             }
         }
