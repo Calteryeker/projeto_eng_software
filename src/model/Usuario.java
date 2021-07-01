@@ -60,4 +60,20 @@ public class Usuario implements Serializable {
         return login;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Usuario){
+            Usuario aux = (Usuario)o;
+            if(aux.getLogin() == this.login){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        int primo = 31;
+        return (primo*login.hashCode());
+    }
 }

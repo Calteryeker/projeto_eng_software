@@ -17,6 +17,7 @@ public class ControladorDespesa {
     private static ControladorDespesa instance;
 
     private ControladorDespesa(IRepositorioDespesa despesaRepo) {
+        repositorioDespesa = despesaRepo;
     }
 
     public static ControladorDespesa getInstance(IRepositorioDespesa despesaRepo) {

@@ -57,6 +57,8 @@ public class DadosPersistentes implements IDadosPersistentes {
             }
         }
 
+        novoUsuario = new Usuario(nome, login, senha);
+
         usuarios.add(novoUsuario);
         System.out.println("Usuario cadastrado com sucesso!!");
         FileUtilRepository.saveFile(usuarios, path);
