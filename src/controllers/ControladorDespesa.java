@@ -1,6 +1,7 @@
 package controllers;
 
 import dao.IRepositorioDespesa;
+import dao.impl.RepositorioDespesa;
 import dao.impl.exceptions.CategoriaNulaException;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.DespesaNaoEncontradaException;
@@ -13,10 +14,11 @@ import model.Despesa;
 
 public class ControladorDespesa {
 
-    private IRepositorioDespesa repositorioDespesa;
+    private static IRepositorioDespesa repositorioDespesa;
     private static ControladorDespesa instance;
 
     private ControladorDespesa(IRepositorioDespesa despesaRepo) {
+        repositorioDespesa = despesaRepo;
     }
 
     public static ControladorDespesa getInstance(IRepositorioDespesa despesaRepo) {
@@ -24,6 +26,8 @@ public class ControladorDespesa {
         if (instance == null) {
             instance = new ControladorDespesa(despesaRepo);
         }
+
+        repositorioDespesa = despesaRepo;
         return instance;
     }
 

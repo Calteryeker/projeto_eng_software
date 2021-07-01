@@ -1,6 +1,7 @@
 package tests.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
@@ -18,6 +19,7 @@ import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.DespesaNaoEncontradaException;
 import model.Categoria;
 import model.Despesa;
+import model.Usuario;
 
 public class ControladorDespesaTest {
 
@@ -25,10 +27,12 @@ public class ControladorDespesaTest {
     private String path = ".\\localstorage\\despesas.ser";
     private LocalDate date = LocalDate.now();
     private Categoria category;
+    private Usuario user;
 
     @BeforeEach
     public void setUp() {
-        controller = ControladorDespesa.getInstance();
+        user = new Usuario("Danilo", "danilo", "danilo_pass");
+        controller = ControladorDespesa.getInstance(user.getRepositorioDespesa());
         category = new Categoria("Viagens");
     }
 
@@ -81,7 +85,7 @@ public class ControladorDespesaTest {
             controller.alterarDespesa("Viagem para o DETRAN", 12341234, expense.getValor(),
                 expense.getData_criacao(), expense.getCategoria());
         });
-        assertEquals("Despesa não encontrada!!", exception.getMessage());
+        assertTrue(exception.getMessage().contentEquals("Despesa não encontrada!!"));
     }
 
     @Test

@@ -25,8 +25,8 @@ public class Usuario implements Serializable {
         this.login = login;
         this.senha = senha;
         this.categorias = new HashMap<>();
-        this.despesaRepo = new RepositorioDespesa("./localstorage/" + this.login + "_" + "despesas" + ".ser");
-        this.metaRepo = new RepositorioMeta("./localstorage/" + this.login + "_" + "metas" + ".ser");
+        this.despesaRepo = new RepositorioDespesa("localstorage/" + this.login + "_" + "despesas" + ".ser");
+        this.metaRepo = new RepositorioMeta("localstorage/" + this.login + "_" + "metas" + ".ser");
     }
 
     public Usuario() {
@@ -58,6 +58,23 @@ public class Usuario implements Serializable {
 
     public String getLogin() {
         return login;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Usuario){
+            Usuario aux = (Usuario)o;
+            if(aux.getLogin() == this.login){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        int primo = 31;
+        return (primo*login.hashCode());
     }
 
 }

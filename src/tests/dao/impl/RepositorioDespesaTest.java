@@ -32,7 +32,7 @@ public class RepositorioDespesaTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        path = ".\\localstorage\\despesas.ser";
+        path = "src\\tests\\localstorage\\despesas.ser";
         expenseRepo = new RepositorioDespesa(path);
         category = new Categoria("Viagens");
         expense = new Despesa("Viagem para recife", 245d, localDate, category);

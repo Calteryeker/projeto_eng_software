@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.List;
@@ -14,14 +15,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import dao.impl.DadosPersistentes;
+import dao.impl.FileUtilRepository;
 import dao.impl.exceptions.UsuarioJaCadastradoException;
+import model.Meta;
 import model.Usuario;
 
 public class DadosPersistentesTest {
 
     private DadosPersistentes persistentData;
     private Usuario signedUp;
-    private String path = ".\\localstorage\\usuarios.ser";
+    private String path = "src\\tests\\localstorage\\usuarios.ser";
 
     @BeforeEach
     public void setUp() {
@@ -45,7 +48,20 @@ public class DadosPersistentesTest {
             persistentData.cadastrarNovoUsuario(signedUp.getNome(), signedUp.getLogin(), signedUp.getSenha());
         persistentData.cadastrarNovoUsuario(signedUp.getNome(), signedUp.getLogin(), signedUp.getSenha());
         });
-        assertEquals("Usuario já Cadastrado", exception.getMessage());
+        assertTrue(exception.getMessage().contentEquals("Usuario já Cadastrado"));
+    }
+
+    @Test
+    public void testeSalvarDadosUser() throws UsuarioJaCadastradoException{
+        persistentData.cadastrarNovoUsuario(signedUp.getNome(), signedUp.getLogin(), signedUp.getSenha());
+        File aux = new File(path);
+        aux.delete();
+        persistentData.salvarDadosUsuario(signedUp.getLogin());
+        assertTrue(aux.exists());
+
+        List<Usuario> usrSv = (List<Usuario>) FileUtilRepository.readFile(path);
+        List<Usuario> expList = persistentData.getUsuarios();
+        assertTrue(expList.equals(usrSv));
     }
 
     @AfterEach
