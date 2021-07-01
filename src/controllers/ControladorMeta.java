@@ -39,7 +39,7 @@ public class ControladorMeta {
             System.out.println("Valor Digitado Para a Meta Inválido!!");
             System.out.print(CSI + "m");
             return false;
-        } else if (data.getDayOfMonth() < dataAuxiliar.getDayOfMonth()) {
+        } else if (data.getMonthValue() < dataAuxiliar.getMonthValue()) {
             String CSI = "\u001B[";
 
             System.out.println();
