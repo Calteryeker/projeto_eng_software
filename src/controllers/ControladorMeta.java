@@ -4,6 +4,7 @@ package controllers;
 import dao.IRepositorioMeta;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.MetaJaCadastradaException;
+import dao.impl.exceptions.MetaNaoEncontradaException;
 import model.Meta;
 
 import java.time.LocalDate;
@@ -61,8 +62,17 @@ public class ControladorMeta {
         }
     }
 
-    public void removerMeta() {
+    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException {
+        return repositorioMeta.removerMeta(data);
+    }
 
+    public Meta alterarMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
+
+        if (!validarDados(valor, data)) {
+            throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
+        } else {
+            return repositorioMeta.alterarMeta(valor,descricao,data);
+        }
     }
 
 

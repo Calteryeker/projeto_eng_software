@@ -76,5 +76,4 @@ public class Usuario implements Serializable {
         int primo = 31;
         return (primo*login.hashCode());
     }
-
 }
