@@ -1,16 +1,13 @@
 package tests.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import javax.swing.text.DateFormatter;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import controllers.ControladorMeta;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.MetaJaCadastradaException;
+import dao.impl.exceptions.MetaNaoEncontradaException;
 import model.Meta;
 import model.Usuario;
 
@@ -57,7 +55,7 @@ public class ControladorMetaTest {
     @DisplayName("Meta com data inválida")
     public void testeCriarMetaDataInv(){
         assertThrows(DadosNaoPreenchidosException.class ,() -> {
-        controller.criarMeta(-100, "Lucro Loja", LocalDate.parse("01/02/2001", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        controller.criarMeta(100, "Lucro Loja", LocalDate.parse("01/02/2001", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         } );
     }
 
@@ -69,6 +67,44 @@ public class ControladorMetaTest {
             controller.criarMeta(1000, "Lucro Loja", date);
             controller.criarMeta(1000, "Lucro Loja", date);
         } );
+    }
+
+    @Test
+    @DisplayName("Alterar meta")
+    public void testeAlterarMeta() throws MetaJaCadastradaException, DadosNaoPreenchidosException, MetaNaoEncontradaException{
+        controller.criarMeta(1000, "Lucro Loja", date);
+        Meta antiga = new Meta(1000, "Lucro Loja", date);
+        Meta obtida = controller.alterarMeta(1200, "Lucro", date);
+        assertNotEquals(obtida, antiga);
+        
+    }
+
+    @Test
+    @DisplayName("Alterar meta que não existe")
+    public void testeAltMetaNaoExiste(){
+        assertThrows(MetaNaoEncontradaException.class, () -> {controller.alterarMeta(1200, "Lucro", date);});
+    }
+
+    @Test
+    @DisplayName("Remover meta")
+    public void testeRemoveMeta() throws MetaJaCadastradaException, DadosNaoPreenchidosException, MetaNaoEncontradaException{
+        Meta criada = controller.criarMeta(1000, "Lucro Loja", date);
+        Meta deletada = controller.removerMeta(date);
+        assertEquals(criada, deletada);
+    }
+
+    @Test
+    @DisplayName("Remover meta não criada")
+    public void testeRemoveMetaNaoCriada() throws MetaNaoEncontradaException{
+       assertThrows(MetaNaoEncontradaException.class, () -> {
+            controller.removerMeta(date);
+       });
+    }
+
+    @AfterEach
+    public void tearDown(){
+        File file = new File("localstorage/" + user.getLogin() + "_" + "metas" + ".ser");
+        file.delete();
     }
 
 }
