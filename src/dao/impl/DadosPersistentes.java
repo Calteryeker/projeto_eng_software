@@ -56,6 +56,8 @@ public class DadosPersistentes implements IDadosPersistentes {
                 throw new UsuarioJaCadastradoException("Usuario já Cadastrado");
             }
         }
+        
+        novoUsuario = new Usuario(nome, login, senha);
 
         novoUsuario = new Usuario(nome, login, senha);
 

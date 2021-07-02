@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class ControladorMeta {
 
-    private IRepositorioMeta repositorioMeta;
+    private static IRepositorioMeta repositorioMeta;
     private static ControladorMeta instance;
 
     private ControladorMeta(IRepositorioMeta repoMeta) {
@@ -23,6 +23,8 @@ public class ControladorMeta {
         if (instance == null) {
             instance = new ControladorMeta(repoMeta);
         }
+
+        repositorioMeta = repoMeta;
         return instance;
     }
 

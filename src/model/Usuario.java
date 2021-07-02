@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import dao.IRepositorioDespesa;
@@ -25,8 +24,8 @@ public class Usuario implements Serializable {
         this.login = login;
         this.senha = senha;
         this.categorias = new HashMap<>();
-        this.despesaRepo = new RepositorioDespesa("./localstorage/" + this.login + "_" + "despesas" + ".ser");
-        this.metaRepo = new RepositorioMeta("./localstorage/" + this.login + "_" + "metas" + ".ser");
+        this.despesaRepo = new RepositorioDespesa("localstorage/" + this.login + "_" + "despesas" + ".ser");
+        this.metaRepo = new RepositorioMeta("localstorage/" + this.login + "_" + "metas" + ".ser");
     }
 
     public Usuario() {

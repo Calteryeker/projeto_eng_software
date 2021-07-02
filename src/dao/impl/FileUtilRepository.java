@@ -43,7 +43,7 @@ public class FileUtilRepository {
         ObjectOutputStream oos = null;
 
         try {
-            fos = new FileOutputStream(out);
+            fos = new FileOutputStream(out.getAbsolutePath());
             oos = new ObjectOutputStream(fos);
             oos.writeObject(instance);
         } catch (Exception e) {
