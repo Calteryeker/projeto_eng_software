@@ -2,8 +2,6 @@ package controllers;
 
 
 import dao.IRepositorioMeta;
-import dao.impl.DadosPersistentes;
-import dao.impl.RepositorioMeta;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.MetaJaCadastradaException;
 import dao.impl.exceptions.MetaNaoEncontradaException;
@@ -14,20 +12,20 @@ import java.util.List;
 
 public class ControladorMeta {
 
-    private IRepositorioMeta repositorioMeta;
+    private static IRepositorioMeta repositorioMeta;
     private static ControladorMeta instance;
 
-    public ControladorMeta() {
-
-        this.repositorioMeta = new RepositorioMeta(".\\localstorage\\metas.ser");
-
+    private ControladorMeta(IRepositorioMeta repoMeta) {
+        repositorioMeta = repoMeta;
     }
 
-    public static ControladorMeta getInstance() {
+    public static ControladorMeta getInstance(IRepositorioMeta repoMeta) {
 
         if (instance == null) {
-            instance = new ControladorMeta();
+            instance = new ControladorMeta(repoMeta);
         }
+
+        repositorioMeta = repoMeta;
         return instance;
     }
 
@@ -37,7 +35,13 @@ public class ControladorMeta {
 
         if (valor <= 0) {
             return false;
-        } else if (data.getMonthValue() <= dataAuxiliar.getMonthValue()) {
+        } else if (data.getMonthValue() < dataAuxiliar.getMonthValue()) {
+            String CSI = "\u001B[";
+
+            System.out.println();
+            System.out.print(CSI + "31" + "m");
+            System.out.println("Você Não Pode Selecionar um Mês Anterior ao Atual!!");
+            System.out.print(CSI + "m");
             return false;
         }
         return true;
@@ -61,14 +65,16 @@ public class ControladorMeta {
         }
     }
 
-    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
+    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException {
+        return repositorioMeta.removerMeta(data);
+    }
 
-        LocalDate dataAuxiliar = LocalDate.now();
+    public Meta alterarMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
 
-        if (data.getMonthValue() < dataAuxiliar.getMonthValue()) {
-            throw new DadosNaoPreenchidosException("Os Dados Não Foram Preenchidos Corretamente!!");
+        if (!validarDados(valor, data)) {
+            throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
         } else {
-            return repositorioMeta.removerMeta(data);
+            return repositorioMeta.alterarMeta(valor,descricao,data);
         }
     }
 

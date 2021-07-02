@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Meta;
 
-public class RepositorioMeta implements IRepositorioMeta {
+public class RepositorioMeta implements IRepositorioMeta, Serializable {
 
     private List<Meta> metas = new ArrayList<>();
     private String path;

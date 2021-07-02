@@ -4,6 +4,7 @@ import dao.IDadosPersistentes;
 import dao.impl.DadosPersistentes;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.UsuarioJaCadastradoException;
+import model.Usuario;
 
 public class ControladorDadosPersistentes {
 
@@ -11,7 +12,7 @@ public class ControladorDadosPersistentes {
     private static ControladorDadosPersistentes instance;
 
     private ControladorDadosPersistentes() {
-        this.dadosPersistentes = new DadosPersistentes(".\\localstorage\\usuarios.ser");
+        this.dadosPersistentes = new DadosPersistentes("localstorage\\usuarios.ser");
     }
 
     public static ControladorDadosPersistentes getInstance() {
@@ -33,5 +34,9 @@ public class ControladorDadosPersistentes {
 
     public IDadosPersistentes getDadosPersistentes() {
         return dadosPersistentes;
+    }
+
+    public Usuario buscarUsuario(String login) {
+        return ((DadosPersistentes) dadosPersistentes).buscarUsuario(login);
     }
 }

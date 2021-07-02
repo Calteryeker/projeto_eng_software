@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Objects;
 
 public class Despesa implements Serializable {
@@ -14,7 +13,6 @@ public class Despesa implements Serializable {
     private double valor;
     private LocalDate data_criacao;
     private Categoria categoria;
-    private Usuario usuario;
 
     public Despesa() {};
 
@@ -24,24 +22,6 @@ public class Despesa implements Serializable {
         this.valor = valor;
         this.data_criacao = data_criacao;
         this.categoria = categoria;
-        usuario = new Usuario("Admin", "admin", "adminpass");
-    }
-
-    public Despesa(String nome, double valor, LocalDate data_criacao, Categoria categoria, Usuario usuario) {
-
-        this.nome = nome;
-        this.valor = valor;
-        this.data_criacao = data_criacao;
-        this.categoria = categoria;
-        this.usuario = usuario;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public String getNome() {
