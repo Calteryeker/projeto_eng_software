@@ -6,9 +6,11 @@ import dao.impl.DadosPersistentes;
 import dao.impl.RepositorioMeta;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.MetaJaCadastradaException;
+import dao.impl.exceptions.MetaNaoEncontradaException;
 import model.Meta;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ControladorMeta {
 
@@ -34,21 +36,8 @@ public class ControladorMeta {
         LocalDate dataAuxiliar = LocalDate.now();
 
         if (valor <= 0) {
-
-            String CSI = "\u001B[";
-
-            System.out.println();
-            System.out.print(CSI + "31" + "m");
-            System.out.println("Valor Digitado Para a Meta Inválido!!");
-            System.out.print(CSI + "m");
             return false;
-        } else if (data.getDayOfMonth() < dataAuxiliar.getDayOfMonth()) {
-            String CSI = "\u001B[";
-
-            System.out.println();
-            System.out.print(CSI + "31" + "m");
-            System.out.println("Você Não Pode Selecionar um Mês Anterior ao Atual!!");
-            System.out.print(CSI + "m");
+        } else if (data.getMonthValue() <= dataAuxiliar.getMonthValue()) {
             return false;
         }
         return true;
@@ -57,15 +46,42 @@ public class ControladorMeta {
     public Meta criarMeta(double valor, String descricao, LocalDate data) throws MetaJaCadastradaException, DadosNaoPreenchidosException {
 
         if (!validarDados(valor, data)) {
-            throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
+            throw new DadosNaoPreenchidosException("Os Dados Não Foram Preenchidos corretamente!!");
         } else {
-            return repositorioMeta.criarMeta(valor,descricao,data);
+            return repositorioMeta.criarMeta(valor, descricao, data);
         }
     }
 
-    public void removerMeta() {
+    public Meta alterarMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
 
+        if (!validarDados(valor, data)) {
+            throw new DadosNaoPreenchidosException("Os Dados Não Foram Preenchidos Corretamente!!");
+        } else {
+            return repositorioMeta.alterarMeta(valor, descricao, data);
+        }
     }
 
+    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
+
+        LocalDate dataAuxiliar = LocalDate.now();
+
+        if (data.getMonthValue() < dataAuxiliar.getMonthValue()) {
+            throw new DadosNaoPreenchidosException("Os Dados Não Foram Preenchidos Corretamente!!");
+        } else {
+            return repositorioMeta.removerMeta(data);
+        }
+    }
+
+    public void visualizarHistoricoDeMetas() {
+        repositorioMeta.visualizarHistoricoDeMetas();
+    }
+
+    public void setMetas(List<Meta> metas) {
+        repositorioMeta.setMetas(metas);
+    }
+
+    public List<Meta> getMetas() {
+        return repositorioMeta.getMetas();
+    }
 
 }
