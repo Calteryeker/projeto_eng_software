@@ -27,7 +27,7 @@ public class DespesaViewController {
     }
 
     public static void criarCategoria(Usuario usuario)
-        throws DataDespesaInvalidaException, NumeroDespesaSelecionadaInvalidoException, NomeDespesaInvalidoException, CategoriaNulaException, DadosNaoPreenchidosException, NumeroDeCategoriaSelecionadaInvalidoException, DespesaNaoEncontradaException, NomeCategoriaInvalidoException, UsuarioJaCadastradoException, ValorDespesaInvalidoException, UsuarioNaoEncontradoException, MetaNaoEncontradaException, MetaJaCadastradaException {
+        throws   UsuarioNaoEncontradoException {
         System.out.println();
         System.out.println("Digite o Nome da Categoria: ");
 
@@ -56,11 +56,10 @@ public class DespesaViewController {
             System.out.print(CSI + "m");
 
         }
-        LoginViewController.getInstance().execute(true);
     }
 
     public void execute(int value, Usuario usuario)
-        throws DadosNaoPreenchidosException, CategoriaNulaException, DespesaNaoEncontradaException, ValorDespesaInvalidoException, NumeroDespesaSelecionadaInvalidoException, NomeCategoriaInvalidoException, DataDespesaInvalidaException, UsuarioJaCadastradoException, NumeroDeCategoriaSelecionadaInvalidoException, NomeDespesaInvalidoException, UsuarioNaoEncontradoException, MetaNaoEncontradaException, MetaJaCadastradaException {
+        throws DadosNaoPreenchidosException, CategoriaNulaException, DespesaNaoEncontradaException, UsuarioNaoEncontradoException {
 
         Scanner sc = new Scanner(System.in);
         int opcaoMenuP = 0;
@@ -79,12 +78,11 @@ public class DespesaViewController {
                 opcaoMenuP = Integer.parseInt(sc.nextLine());
 
                 if (opcaoMenuP == 1) {
-
                     System.out.println("Insira os dados da nova despesa: ");
                     System.out.println("Nome: ");
                     String nomeDespesa = sc.nextLine();
                     System.out.println("Valor: ");
-                    Double valorDespesa = Double.parseDouble(sc.nextLine());
+                    double valorDespesa = Double.parseDouble(sc.nextLine());
                     System.out.println("Data (Formato: dd-MM-yyyy): ");
                     String dataDespesa = sc.nextLine();
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -107,7 +105,7 @@ public class DespesaViewController {
 
                     } else {
 
-                        if (nomeDespesa == null) {
+                        if (nomeDespesa.isBlank()) {
 
                             String CSI = "\u001B[";
 
@@ -271,7 +269,7 @@ public class DespesaViewController {
                                 System.out.println("Nome: ");
                                 String nomeDespesa = sc.nextLine();
                                 System.out.println("Valor: ");
-                                Double valorDespesa = Double.parseDouble(sc.nextLine());
+                                double valorDespesa = Double.parseDouble(sc.nextLine());
                                 System.out.println("Data (Formato: dd-MM-yyyy): ");
                                 String dataDespesa = sc.nextLine();
                                 DateTimeFormatter format = DateTimeFormatter
@@ -296,7 +294,7 @@ public class DespesaViewController {
 
                                 } else {
 
-                                    if (nomeDespesa == null) {
+                                    if (nomeDespesa.isBlank()) {
 
                                         String CSI = "\u001B[";
 
@@ -368,8 +366,6 @@ public class DespesaViewController {
                     } else {
                         ControladorDespesa.getInstance(usuario.getRepositorioDespesa()).gerarGrafico(usuario.getLogin());
                     }
-                } else {
-                    LoginViewController.getInstance().execute(true);
                 }
             }
         } else {

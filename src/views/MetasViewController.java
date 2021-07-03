@@ -237,8 +237,6 @@ public class MetasViewController {
                 metaAuxiliar = exibirMenuAlterarMeta(sc,usuario);
             } else if (opcaoMenuP == 4) {
                 visualizarMetas(usuario);
-            } else if (opcaoMenuP == 5) {
-                LoginViewController.getInstance().execute(true);
             }
 
         }
