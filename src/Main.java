@@ -1,4 +1,6 @@
 
+import dao.impl.exceptions.MetaNaoEncontradaException;
+import dao.impl.exceptions.UsuarioNaoEncontradoException;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -24,7 +26,7 @@ import views.MetasViewController;
 public class Main {
 
     public static void main(String[] args)
-        throws DadosNaoPreenchidosException, UsuarioJaCadastradoException, NumeroDespesaSelecionadaInvalidoException, NomeCategoriaInvalidoException, ValorDespesaInvalidoException, CategoriaNulaException, DataDespesaInvalidaException, NumeroDeCategoriaSelecionadaInvalidoException, DespesaNaoEncontradaException, NomeDespesaInvalidoException, MetaJaCadastradaException {
+        throws DadosNaoPreenchidosException, UsuarioJaCadastradoException, NumeroDespesaSelecionadaInvalidoException, NomeCategoriaInvalidoException, ValorDespesaInvalidoException, CategoriaNulaException, DataDespesaInvalidaException, NumeroDeCategoriaSelecionadaInvalidoException, DespesaNaoEncontradaException, NomeDespesaInvalidoException, MetaJaCadastradaException, UsuarioNaoEncontradoException, MetaNaoEncontradaException {
          /*
         //LoginViewController.getInstance().execute(false);
         Usuario usuario = new Usuario("João", "joao", "senha_joao");
@@ -47,10 +49,7 @@ public class Main {
             System.out.println(meta);
         }
         */
-        Usuario usuarioAtivo = null;
 
-        usuarioAtivo = LoginViewController.execute();
-
-        [...]
+        LoginViewController.getInstance().execute(false);
     }
 }

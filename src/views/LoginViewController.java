@@ -1,12 +1,13 @@
 package views;
 
-import controllers.ControladorCategoria;
 import controllers.ControladorDadosPersistentes;
 import controllers.ControladorLogin;
 import dao.impl.exceptions.CategoriaNulaException;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.DataDespesaInvalidaException;
 import dao.impl.exceptions.DespesaNaoEncontradaException;
+import dao.impl.exceptions.MetaJaCadastradaException;
+import dao.impl.exceptions.MetaNaoEncontradaException;
 import dao.impl.exceptions.NomeCategoriaInvalidoException;
 import dao.impl.exceptions.NomeDespesaInvalidoException;
 import dao.impl.exceptions.NumeroDeCategoriaSelecionadaInvalidoException;
@@ -93,7 +94,7 @@ public class LoginViewController {
     }
 
     public void execute(boolean logado)
-        throws UsuarioJaCadastradoException, DadosNaoPreenchidosException, NumeroDespesaSelecionadaInvalidoException, NumeroDeCategoriaSelecionadaInvalidoException, NomeCategoriaInvalidoException, ValorDespesaInvalidoException, CategoriaNulaException, DataDespesaInvalidaException, DespesaNaoEncontradaException, NomeDespesaInvalidoException {
+        throws UsuarioJaCadastradoException, DadosNaoPreenchidosException, NumeroDespesaSelecionadaInvalidoException, NumeroDeCategoriaSelecionadaInvalidoException, NomeCategoriaInvalidoException, ValorDespesaInvalidoException, CategoriaNulaException, DataDespesaInvalidaException, DespesaNaoEncontradaException, NomeDespesaInvalidoException, UsuarioNaoEncontradoException, MetaNaoEncontradaException, MetaJaCadastradaException {
 
         Scanner sc = new Scanner(System.in);
 
@@ -126,8 +127,8 @@ public class LoginViewController {
                     Cadastro();
                 } else if (opcaoMenuP == 2) {
                     logado = Login();
-                } else {
-                    return;
+                } else if (opcaoMenuP == 3) {
+                    System.exit(0);
                 }
             }
 
@@ -153,7 +154,7 @@ public class LoginViewController {
                 if (opcaoMenu2 == 1) {
 
 
-                    if(ControladorCategoria.getInstance().getCategorias() == null || ControladorCategoria.getInstance().getCategorias().isEmpty()) {
+                    if(usuarioLogado.getCategorias() == null || usuarioLogado.getCategorias().isEmpty()) {
 
                         String CSI = "\u001B[";
 
@@ -163,13 +164,14 @@ public class LoginViewController {
                         System.out.print(CSI + "m");
 
                     } else{
-                        DespesaViewController.getInstance().execute(1);
+                        DespesaViewController.getInstance().execute(1,usuarioLogado);
                     }
                 } else if (opcaoMenu2 == 2) {
-                        DespesaViewController.getInstance().execute(2);
+                        DespesaViewController.getInstance().execute(2,usuarioLogado);
                 } else if (opcaoMenu2 == 3) {
-
+                        MetasViewController.getInstance().execute(usuarioLogado);
                 } else if (opcaoMenu2 == 4) {
+                    usuarioLogado = null;
                     aux = 0;
                     logado = false;
                 }

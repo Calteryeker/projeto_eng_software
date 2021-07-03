@@ -20,7 +20,9 @@ public interface IDadosPersistentes {
 
     Usuario cadastrarNovoUsuario(String nome, String login, String senha) throws UsuarioJaCadastradoException;
 
-    Map<String, Categoria> recuperarCategorias(String login);
+    public Usuario atualizarUsuario(Usuario usuario) throws UsuarioNaoEncontradoException;
+
+    List<Categoria> recuperarCategorias(String login);
 
     Usuario removerUsuario(String login) throws UsuarioNaoEncontradoException;
 

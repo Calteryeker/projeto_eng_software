@@ -89,7 +89,7 @@ public class ControladorMetaTest {
     @DisplayName("Remover meta")
     public void testeRemoveMeta() throws MetaJaCadastradaException, DadosNaoPreenchidosException, MetaNaoEncontradaException{
         Meta criada = controller.criarMeta(1000, "Lucro Loja", date);
-        Meta deletada = controller.removerMeta(date);
+        Meta deletada = controller.removerMeta(date.getMonthValue());
         assertEquals(criada, deletada);
     }
 
@@ -97,7 +97,7 @@ public class ControladorMetaTest {
     @DisplayName("Remover meta não criada")
     public void testeRemoveMetaNaoCriada() throws MetaNaoEncontradaException{
        assertThrows(MetaNaoEncontradaException.class, () -> {
-            controller.removerMeta(date);
+            controller.removerMeta(date.getMonthValue());
        });
     }
 

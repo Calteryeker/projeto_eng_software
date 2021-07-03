@@ -11,7 +11,7 @@ public interface IRepositorioMeta {
 
     Meta criarMeta(double valor, String descricao, LocalDate data) throws MetaJaCadastradaException;
 
-    Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException;
+    Meta removerMeta(int mes) throws MetaNaoEncontradaException;
 
     Meta alterarMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException;
 

@@ -25,7 +25,6 @@ public class ControladorMeta {
             instance = new ControladorMeta(repoMeta);
         }
 
-        repositorioMeta = repoMeta;
         return instance;
     }
 
@@ -65,17 +64,8 @@ public class ControladorMeta {
         }
     }
 
-    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException {
-        return repositorioMeta.removerMeta(data);
-    }
-
-    public Meta alterarMeta(double valor, String descricao, LocalDate data) throws MetaNaoEncontradaException, DadosNaoPreenchidosException {
-
-        if (!validarDados(valor, data)) {
-            throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
-        } else {
-            return repositorioMeta.alterarMeta(valor,descricao,data);
-        }
+    public Meta removerMeta(int mes) throws MetaNaoEncontradaException {
+        return repositorioMeta.removerMeta(mes);
     }
 
     public void visualizarHistoricoDeMetas() {

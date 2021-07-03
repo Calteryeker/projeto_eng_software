@@ -26,8 +26,6 @@ public class ControladorDespesa {
         if (instance == null) {
             instance = new ControladorDespesa(despesaRepo);
         }
-
-        repositorioDespesa = despesaRepo;
         return instance;
     }
 
@@ -63,6 +61,12 @@ public class ControladorDespesa {
             return repositorioDespesa.visualizarDespesasPorCategoria(categoria);
         }
 
+    }
+
+    public void vizualizarDespesas(){repositorioDespesa.visualizarDespesas();}
+
+    public void gerarGrafico(String nome){
+        repositorioDespesa.gerarCSV(nome);
     }
 
 }

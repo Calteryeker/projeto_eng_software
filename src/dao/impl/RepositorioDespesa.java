@@ -103,13 +103,19 @@ public class RepositorioDespesa implements IRepositorioDespesa, Serializable {
 
     public void visualizarDespesas() {
 
-        for (Despesa x : despesas) {
-            System.out.println(x);
+        if(despesas.isEmpty()){
+            String CSI = "\u001B[";
+
+            System.out.println();
+            System.out.print(CSI + "31" + "m");
+            System.out.println("Não Existem Despesas Para Vizualizar");
+            System.out.print(CSI + "m");
         }
-    }
-
-    public void visualizarDespesaGrafico() {
-
+        else {
+            for (Despesa x : despesas) {
+                System.out.println(x);
+            }
+        }
     }
 
     public List<Despesa> visualizarDespesasPorCategoria(Categoria categoria) {

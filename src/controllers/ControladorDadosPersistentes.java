@@ -4,6 +4,7 @@ import dao.IDadosPersistentes;
 import dao.impl.DadosPersistentes;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.UsuarioJaCadastradoException;
+import dao.impl.exceptions.UsuarioNaoEncontradoException;
 import model.Usuario;
 
 public class ControladorDadosPersistentes {
@@ -29,6 +30,12 @@ public class ControladorDadosPersistentes {
             throw new DadosNaoPreenchidosException("Os dados não foram preenchidos corretamente");
         } else {
             dadosPersistentes.cadastrarNovoUsuario(nome, login, senha);
+        }
+    }
+
+    public void atualizarUsuario(Usuario usuario) throws UsuarioNaoEncontradoException {
+        if(usuario != null){
+            dadosPersistentes.atualizarUsuario(usuario);
         }
     }
 

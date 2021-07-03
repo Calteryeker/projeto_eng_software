@@ -56,8 +56,6 @@ public class DadosPersistentes implements IDadosPersistentes {
                 throw new UsuarioJaCadastradoException("Usuario já Cadastrado");
             }
         }
-        
-        novoUsuario = new Usuario(nome, login, senha);
 
         novoUsuario = new Usuario(nome, login, senha);
 
@@ -68,8 +66,28 @@ public class DadosPersistentes implements IDadosPersistentes {
         return novoUsuario;
     }
 
-    public Map<String, Categoria> recuperarCategorias(Usuario usuario) {
+    public List<Categoria> recuperarCategorias(Usuario usuario) {
         return usuario.getCategorias();
+    }
+
+    public Usuario atualizarUsuario(Usuario usuario) throws UsuarioNaoEncontradoException {
+
+        int index = -1;
+
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).equals(usuario)){
+                index = i;
+            }
+        }
+        if(index != -1){
+            usuarios.add(index, usuario);
+        } else {
+            throw new UsuarioNaoEncontradoException("Usuario não encontrado!!");
+        }
+
+        FileUtilRepository.saveFile(usuarios, path);
+
+        return usuarios.get(index);
     }
 
     public Usuario removerUsuario(String login) throws UsuarioNaoEncontradoException {
@@ -102,7 +120,7 @@ public class DadosPersistentes implements IDadosPersistentes {
     }
 
     @Override
-    public Map<String, Categoria> recuperarCategorias(String login) {
+    public List<Categoria> recuperarCategorias(String login) {
         Usuario user = buscarUsuario(login);
         return user.getCategorias();
     }

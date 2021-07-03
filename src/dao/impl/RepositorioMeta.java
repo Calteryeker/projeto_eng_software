@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import model.Meta;
 
 public class RepositorioMeta implements IRepositorioMeta, Serializable {
@@ -50,7 +51,7 @@ public class RepositorioMeta implements IRepositorioMeta, Serializable {
         int auxiliar = -1;
 
         for (int i = 0; i < metas.size(); i++) {
-            if (metas.get(i).getData_criacao().equals(data)) {
+            if (metas.get(i).getData_criacao().getMonthValue() == data.getMonthValue()) {
                 auxiliar = i;
                 altMeta = metas.get(i);
             }
@@ -70,12 +71,12 @@ public class RepositorioMeta implements IRepositorioMeta, Serializable {
         return altMeta;
     }
 
-    public Meta removerMeta(LocalDate data) throws MetaNaoEncontradaException {
+    public Meta removerMeta(int mes) throws MetaNaoEncontradaException {
 
         Meta delMeta = null;
         int auxiliar = -1;
         for (int i = 0; i < metas.size(); i++) {
-            if (metas.get(i).getData_criacao().equals(data)) {
+            if (metas.get(i).getData_criacao().getMonthValue() == mes) {
                 auxiliar = i;
                 delMeta = metas.get(i);
             }
@@ -99,8 +100,26 @@ public class RepositorioMeta implements IRepositorioMeta, Serializable {
 
     public void visualizarHistoricoDeMetas() {
 
-        for (Meta x : metas) {
-            System.out.println(x);
+        if (metas != null) {
+            for (int i = LocalDate.now().getMonthValue(); i < 13; i++) {
+                Meta aux = null;
+
+                for (Meta meta : metas) {
+                    if (meta.getData_criacao().getMonthValue() == i) {
+                        aux = meta;
+                    }
+                }
+
+                if (aux != null) {
+                    System.out.println(aux);
+                } else {
+                    System.out.println("Meta do Mês " + i + ": Não Existe Meta");
+                }
+            }
+        } else {
+            for (int i = LocalDate.now().getMonthValue(); i < 13; i++) {
+                System.out.println("Meta do Mês " + i + ": Não Existe Meta");
+            }
         }
     }
 
