@@ -1,8 +1,8 @@
 package dao;
 
 import dao.impl.exceptions.DespesaNaoEncontradaException;
+import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import model.Categoria;
 import model.Despesa;
@@ -21,7 +21,7 @@ public interface IRepositorioDespesa {
 
   void visualizarDespesas();
 
-  void visualizarDespesaGrafico();
+  File gerarCSV(String name);
 
   List<Despesa> visualizarDespesasPorCategoria(Categoria categoria);
 

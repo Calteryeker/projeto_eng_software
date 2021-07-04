@@ -1,7 +1,6 @@
 package controllers;
 
 import dao.IRepositorioDespesa;
-import dao.impl.DadosPersistentes;
 import dao.impl.RepositorioDespesa;
 import dao.impl.exceptions.CategoriaNulaException;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
@@ -15,17 +14,17 @@ import model.Despesa;
 
 public class ControladorDespesa {
 
-    private IRepositorioDespesa repositorioDespesa;
+    private static IRepositorioDespesa repositorioDespesa;
     private static ControladorDespesa instance;
 
-    public ControladorDespesa() {
-        this.repositorioDespesa = new RepositorioDespesa(".\\localstorage\\despesas.ser");
+    private ControladorDespesa(IRepositorioDespesa despesaRepo) {
+        repositorioDespesa = despesaRepo;
     }
 
-    public static ControladorDespesa getInstance() {
+    public static ControladorDespesa getInstance(IRepositorioDespesa despesaRepo) {
 
         if (instance == null) {
-            instance = new ControladorDespesa();
+            instance = new ControladorDespesa(despesaRepo);
         }
         return instance;
     }
@@ -62,6 +61,12 @@ public class ControladorDespesa {
             return repositorioDespesa.visualizarDespesasPorCategoria(categoria);
         }
 
+    }
+
+    public void vizualizarDespesas(){repositorioDespesa.visualizarDespesas();}
+
+    public void gerarGrafico(String nome){
+        repositorioDespesa.gerarCSV(nome);
     }
 
 }

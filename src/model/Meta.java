@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
@@ -20,6 +21,13 @@ public class Meta implements Serializable {
         this.valor = valor;
         this.descricao = descricao;
         data_criacao = LocalDate.now();
+    }
+
+    public Meta(double valor, String descricao, LocalDate data) {
+
+        this.valor = valor;
+        this.descricao = descricao;
+        data_criacao = data;
     }
 
     public double getValor() {
@@ -44,10 +52,14 @@ public class Meta implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Meta meta = (Meta) o;
-        return Objects.equals(descricao, meta.descricao);
+        return data_criacao.getMonthValue() == meta.data_criacao.getMonthValue();
     }
 
     @Override
@@ -57,10 +69,10 @@ public class Meta implements Serializable {
 
     @Override
     public String toString() {
-        return "Meta{" +
-                "Valor=" + valor +
-                ", Descrição='" + descricao + '\'' +
-                ", Data de criação=" + data_criacao +
-                '}';
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        return "Meta do Mês "+ data_criacao.getMonthValue() +
+                ": Valor(R$): " + df.format(valor) +
+                ", Descrição: " + descricao;
     }
 }

@@ -1,23 +1,30 @@
 package dao;
 
 import dao.impl.exceptions.UsuarioJaCadastradoException;
+import dao.impl.exceptions.UsuarioNaoEncontradoException;
+import model.Categoria;
+import model.Despesa;
+import model.Meta;
 import model.Usuario;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IDadosPersistentes {
 
-    void recuperarMetasUsuario();
+    List<Meta> recuperarMetasUsuario(String login);
 
-    void recuperarDespesasUsuario();
+    List<Despesa> recuperarDespesasUsuario(String login);
 
-    void salvarDadosUsuario();
+    void salvarDadosUsuario(String login);
 
-    void cadastrarNovoUsuario(String nome, String login, String senha) throws UsuarioJaCadastradoException;
+    Usuario cadastrarNovoUsuario(String nome, String login, String senha) throws UsuarioJaCadastradoException;
 
-    void recuperarCategorias();
+    public Usuario atualizarUsuario(Usuario usuario) throws UsuarioNaoEncontradoException;
 
-    void removerUsuario();
+    List<Categoria> recuperarCategorias(String login);
+
+    Usuario removerUsuario(String login) throws UsuarioNaoEncontradoException;
 
     List<Usuario> getUsuarios();
 

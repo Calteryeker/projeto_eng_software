@@ -1,9 +1,9 @@
 package tests.dao.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class RepositorioDespesaTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        path = ".\\localstorage\\despesas.ser";
+        path = "src\\tests\\localstorage\\despesas.ser";
         expenseRepo = new RepositorioDespesa(path);
         category = new Categoria("Viagens");
         expense = new Despesa("Viagem para recife", 245d, localDate, category);
@@ -100,6 +100,15 @@ public class RepositorioDespesaTest {
         List<Despesa> list = expenseRepo.visualizarDespesasPorCategoria(category);
         assertNotNull(list);
         assertEquals(expense, list.get(0));
+    }
+
+    @Test
+    @DisplayName("Create CSV file should work")
+    public void testCreateFileSucceeds() {
+        expenseRepo.criarDespesa("Viagem para recife", 245d, localDate, category);
+        File csv = expenseRepo.gerarCSV("file");
+        System.out.println(System.getProperty("user.dir"));
+        assertTrue(csv.exists() && csv.isFile());
     }
 
     @AfterEach

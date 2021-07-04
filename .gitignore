@@ -1,3 +1,5 @@
 .idea
 .vscode
+out
 lib/*
+localstorage
