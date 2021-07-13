@@ -1,188 +1,79 @@
 package views;
 
-import controllers.ControladorDadosPersistentes;
 import controllers.ControladorLogin;
-import dao.impl.exceptions.CategoriaNulaException;
-import dao.impl.exceptions.DadosNaoPreenchidosException;
-import dao.impl.exceptions.DataDespesaInvalidaException;
-import dao.impl.exceptions.DespesaNaoEncontradaException;
-import dao.impl.exceptions.MetaJaCadastradaException;
-import dao.impl.exceptions.MetaNaoEncontradaException;
-import dao.impl.exceptions.NomeCategoriaInvalidoException;
-import dao.impl.exceptions.NomeDespesaInvalidoException;
-import dao.impl.exceptions.NumeroDeCategoriaSelecionadaInvalidoException;
-import dao.impl.exceptions.NumeroDespesaSelecionadaInvalidoException;
 import dao.impl.exceptions.SenhaIncorretaException;
-import dao.impl.exceptions.UsuarioJaCadastradoException;
 import dao.impl.exceptions.UsuarioNaoEncontradoException;
-import dao.impl.exceptions.ValorDespesaInvalidoException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import main.java.views.util.Alerts;
 import model.Usuario;
 
-import java.util.Scanner;
+public class LoginViewController implements Initializable {
 
-public class LoginViewController {
+  @FXML private TextField usernameField;
+  @FXML private PasswordField passwordField;
+  @FXML private Button loginBt;
+  @FXML private Button cadastroBt;
 
-    private static LoginViewController instance;
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {}
 
-    private LoginViewController() {
+  @FXML
+  public void onLoginBtAction(ActionEvent event) {
+    if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
 
-    }
+      Alerts.showAlert(
+          "Não foi possivel logar",
+          null,
+          "Campos usuario e senha precisam ser preenchidos",
+          AlertType.ERROR);
+    } else {
 
-    public static LoginViewController getInstance() {
+      try {
+        boolean logged =
+            ControladorLogin.getInstance().login(usernameField.getText(), passwordField.getText());
 
-        if (instance == null) {
-            instance = new LoginViewController();
+        if (logged) {
+
+          Usuario usuarioLogado = ControladorLogin.getInstance().getLoggedUser();
+
+          logar();
         }
-        return instance;
+      } catch (UsuarioNaoEncontradoException e) {
+        Alerts.showAlert("Não foi possivel logar", null, e.getMessage(), AlertType.INFORMATION);
+      } catch (SenhaIncorretaException e) {
+        Alerts.showAlert("Não foi possivel logar", null, e.getMessage(), AlertType.INFORMATION);
+      }
     }
+  }
 
-    public static boolean Login() {
+  @FXML
+  public void onCadastroBtAction(ActionEvent actionEvent) {
+    try {
 
-        boolean logado = false;
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println();
-        System.out.println("Digite o Login: ");
-        String username = sc.nextLine();
-        System.out.println("Digite a Senha: ");
-        String senha = sc.nextLine();
-
-        try {
-
-            ControladorLogin.getInstance().login(username, senha);
-            System.out.println();
-            System.out.println("Login efetuado com sucesso!!");
-            logado = true;
-
-        } catch (UsuarioNaoEncontradoException e) {
-
-            String CSI = "\u001B[";
-
-            System.out.println();
-            System.out.print(CSI + "31" + "m");
-            System.out.println(e.getMessage());
-            System.out.print(CSI + "m");
-
-        } catch (SenhaIncorretaException e) {
-
-            String CSI = "\u001B[";
-
-            System.out.println();
-            System.out.print(CSI + "31" + "m");
-            System.out.println(e.getMessage());
-            System.out.print(CSI + "m");
-        }
-
-        return logado;
+      Parent newPage = FXMLLoader.load(getClass().getResource("/views/Cadastro.fxml"));
+      passwordField.getScene().setRoot(newPage);
+    } catch (Exception e) {
+      System.out.println("Error");
     }
+  }
 
-    public static void Cadastro()
-            throws UsuarioJaCadastradoException, DadosNaoPreenchidosException {
+  private void logar() {
+    try {
 
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println();
-        System.out.println("Digite o Nome: ");
-        String nome = sc.nextLine();
-        System.out.println("Digite o Login: ");
-        String username = sc.nextLine();
-        System.out.println("Digite a Senha: ");
-        String senha = sc.nextLine();
-
-        ControladorDadosPersistentes.getInstance().cadastrarUsuario(nome, username, senha);
+      Parent newPage = FXMLLoader.load(getClass().getResource("/views/UsuarioMainPage.fxml"));
+      passwordField.getScene().setRoot(newPage);
+    } catch (Exception e) {
+      System.out.println("Error");
     }
-
-    public void execute(boolean logado)
-        throws UsuarioJaCadastradoException, DadosNaoPreenchidosException, NumeroDespesaSelecionadaInvalidoException, NumeroDeCategoriaSelecionadaInvalidoException, NomeCategoriaInvalidoException, ValorDespesaInvalidoException, CategoriaNulaException, DataDespesaInvalidaException, DespesaNaoEncontradaException, NomeDespesaInvalidoException, UsuarioNaoEncontradoException, MetaNaoEncontradaException, MetaJaCadastradaException {
-
-        Scanner sc = new Scanner(System.in);
-
-        //Auxiliares
-        int opcaoMenuP = 0;
-        int opcaoMenu2 = 0;
-        int opcaoMenuDes = 0;
-        int opcaoMenuCat = 0;
-        int opcaoMenuMet = 0;
-        int aux = 0;
-        boolean admDespesas = false;
-        boolean admMetas = false;
-        boolean admCategorias = false;
-        Usuario usuarioLogado = new Usuario();
-
-        while (opcaoMenuP != 3) {
-
-            if(!logado) {
-                System.out.println();
-                System.out.println("Digite a Opção: ");
-                System.out.println("1 - Cadastrar Novo Usuario;");
-                System.out.println("2 - Logar;");
-                System.out.println("3 - Sair do Sistema.");
-
-                opcaoMenuP = sc.nextInt();
-
-                sc.nextLine();
-
-                if (opcaoMenuP == 1) {
-                    Cadastro();
-                } else if (opcaoMenuP == 2) {
-                    logado = Login();
-                } else if (opcaoMenuP == 3) {
-                    System.exit(0);
-                }
-            }
-
-            while (logado) {
-
-                if (aux == 0) {
-                    usuarioLogado = ControladorLogin.getInstance().getLoggedUser();
-                    aux = 1;
-                    opcaoMenuP = 0;
-                }
-
-                System.out.println();
-                System.out.println("Digite a Opção: ");
-                System.out.println("1 - Administrar Despesas;");
-                System.out.println("2 - Criar Uma Categoria;");
-                System.out.println("3 - Administrar Metas;");
-                System.out.println("4 - Logout.");
-
-                opcaoMenu2 = sc.nextInt();
-
-                sc.nextLine();
-
-                if (opcaoMenu2 == 1) {
-
-
-                    if(usuarioLogado.getCategorias() == null || usuarioLogado.getCategorias().isEmpty()) {
-
-                        String CSI = "\u001B[";
-
-                        System.out.println();
-                        System.out.print(CSI + "31" + "m");
-                        System.out.println("Não Existem Categorias No Sistema Para Administrar Despesas, Operação Cancelada");
-                        System.out.print(CSI + "m");
-
-                    } else{
-                        DespesaViewController.getInstance().execute(1,usuarioLogado);
-                    }
-                } else if (opcaoMenu2 == 2) {
-                        DespesaViewController.getInstance().execute(2,usuarioLogado);
-                } else if (opcaoMenu2 == 3) {
-                        MetasViewController.getInstance().execute(usuarioLogado);
-                } else if (opcaoMenu2 == 4) {
-                    usuarioLogado = null;
-                    aux = 0;
-                    logado = false;
-                }
-
-            }
-
-        }
-        sc.close();
-    }
-
-
+  }
 }
-
-
