@@ -16,7 +16,6 @@ public class UsuarioMainPageController implements Initializable {
 
   @FXML private Button backBt;
   @FXML private Button startShoppingBt;
-  @FXML private Button shoppingHistoryBt;
   @FXML private Button cureServiceBt;
   @FXML private Text welcomeTxt;
 
@@ -51,7 +50,7 @@ public class UsuarioMainPageController implements Initializable {
 
     try {
 
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/DespesasListView.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MetasListView.fxml"));
       Parent newPage = loader.load();
       backBt.getScene().setRoot(newPage);
     } catch (Exception e) {
@@ -67,18 +66,6 @@ public class UsuarioMainPageController implements Initializable {
       backBt.getScene().setRoot(newPage);
     } catch (Exception e) {
       System.out.println(e.getMessage());
-    }
-  }
-
-  public void onShoppingHistoryBtAction(ActionEvent event) {
-    try {
-
-      FXMLLoader loader =
-          new FXMLLoader(getClass().getResource("/main/java/views/OrderReportView.fxml"));
-      Parent newPage = loader.load();
-      backBt.getScene().setRoot(newPage);
-    } catch (Exception e) {
-      System.out.println("Error");
     }
   }
 

@@ -31,6 +31,7 @@ public class DespesasListViewController implements Initializable {
   @FXML private Button buttonUpdate;
   @FXML private Button buttonDelete;
   @FXML private Button buttonBack;
+  @FXML private Button saveCsvBt;
   @FXML private TableView<Despesa> tableViewProduct;
   @FXML private TableColumn<Despesa, String> tableColumnNameProduct;
   @FXML private TableColumn<Despesa, String> tableColumnDescription;
@@ -125,6 +126,12 @@ public class DespesasListViewController implements Initializable {
     } catch (Exception e) {
       Alerts.showAlert("Error", null, "Select the field to be deleted", AlertType.ERROR);
     }
+  }
+
+  @FXML
+  public void onSaveCsvBtAction(ActionEvent event) {
+    ControladorDespesa.getInstance(usuarioLogado.getRepositorioDespesa()).gerarGrafico("gráfico");
+    Alerts.showAlert("Sucesso", null, "O arquivo foi salvo com sucesso!", AlertType.INFORMATION);
   }
 
   @FXML

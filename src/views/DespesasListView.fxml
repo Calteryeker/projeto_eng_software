@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.DespesasListViewController">
+<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.DespesasListViewController">
   <children>
     <Label contentDisplay="CENTER" text="Administrar Despesas">
       <VBox.margin>
@@ -39,6 +39,7 @@
         <Button fx:id="buttonNewProduct" mnemonicParsing="false" onAction="#onButtonNewProductAction" text="Nova Despesa" />
         <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#onButtonUpdateAction" text="Atualizar Despesa" />
         <Button fx:id="buttonDelete" mnemonicParsing="false" onAction="#onButtonDeleteAction" text="Deletar Despesa" />
+            <Button fx:id="saveCsvBt" mnemonicParsing="false" onAction="#onSaveCsvBtAction" text="Salvar em .csv" />
       </items>
     </ToolBar>
   </children>
