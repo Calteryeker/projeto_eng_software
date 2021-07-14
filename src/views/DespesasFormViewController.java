@@ -6,12 +6,10 @@ import controllers.ControladorLogin;
 import dao.impl.exceptions.DadosNaoPreenchidosException;
 import dao.impl.exceptions.DespesaNaoEncontradaException;
 import dao.impl.exceptions.UsuarioNaoEncontradoException;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,7 +45,8 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
   public void initialize(URL url, ResourceBundle resourceBundle) {
     usuario = ControladorLogin.getInstance().getLoggedUser();
 
-    ObservableList<Categoria> categoriasOS = FXCollections.observableArrayList(usuario.getCategorias());
+    ObservableList<Categoria> categoriasOS =
+        FXCollections.observableArrayList(usuario.getCategorias());
     categoriesCB.setItems(categoriasOS);
   }
 
@@ -100,7 +99,8 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
 
           if (Double.parseDouble(descriptionProductField.getText().replace(',', '.')) > 0) {
 
-            Categoria categoria = new Categoria(categoriesCB.getSelectionModel().getSelectedItem().getNome());
+            Categoria categoria =
+                new Categoria(categoriesCB.getSelectionModel().getSelectedItem().getNome());
 
             ControladorDespesa.getInstance(usuario.getRepositorioDespesa())
                 .alterarDespesa(
@@ -131,9 +131,7 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
     goToProductList();
   }
 
-
-  public void onAddCategorieBtAction(ActionEvent event)
-  {
+  public void onAddCategorieBtAction(ActionEvent event) {
 
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/CategoryFormView.fxml"));
@@ -146,8 +144,7 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
       stage.setTitle("Criar categoria");
       stage.setScene(new Scene(newPage));
       stage.show();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       System.out.println("Error");
     }
   }
@@ -179,7 +176,8 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
     valueUnitProductField.setText(String.valueOf(data));
 
     usuario = ControladorLogin.getInstance().getLoggedUser();
-    ObservableList<Categoria> categoriasOS = FXCollections.observableArrayList(usuario.getCategorias());
+    ObservableList<Categoria> categoriasOS =
+        FXCollections.observableArrayList(usuario.getCategorias());
     categoriesCB.setItems(categoriasOS);
 
     categoriesCB.setValue(product.getCategoria());
@@ -191,7 +189,8 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
 
   @Override
   public void onDataChanged() {
-    ObservableList<Categoria> categoriasOS = FXCollections.observableArrayList(usuario.getCategorias());
+    ObservableList<Categoria> categoriasOS =
+        FXCollections.observableArrayList(usuario.getCategorias());
     categoriesCB.setItems(categoriasOS);
 
     if (product != null) {

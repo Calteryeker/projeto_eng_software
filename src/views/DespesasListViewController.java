@@ -114,7 +114,7 @@ public class DespesasListViewController implements Initializable {
 
         Optional<ButtonType> result =
             Alerts.showConfirmation(
-                "Confirmation", "Are you sure you want to delete the selected field ?");
+                "Confirmation", "Você tem certeza que deseja remover a Despesa selecionada?");
         if (result.isPresent() && result.get() == ButtonType.OK) {
 
           ControladorDespesa.getInstance(usuarioLogado.getRepositorioDespesa())

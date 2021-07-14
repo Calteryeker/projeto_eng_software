@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MetasListViewController">
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MetasListViewController">
   <children>
     <Label contentDisplay="CENTER" text="Administrar Metas">
       <VBox.margin>
@@ -35,8 +35,8 @@
     <ToolBar prefHeight="40.0" prefWidth="200.0">
       <items>
         <Button fx:id="buttonBack" mnemonicParsing="false" onAction="#onButtonBackAction" text="←" />
-        <Button fx:id="buttonNewProduct" mnemonicParsing="false" text="Nova Meta" />
-        <Button fx:id="buttonUpdate" mnemonicParsing="false" text="Atualizar Meta" />
+        <Button fx:id="buttonNewProduct" mnemonicParsing="false" onAction="#onButtonNewMetaAction" text="Nova Meta" />
+        <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#onButtonUpdateAction" text="Atualizar Meta" />
         <Button fx:id="buttonDelete" mnemonicParsing="false" onAction="#onButtonDeleteAction" text="Deletar Meta" />
       </items>
     </ToolBar>
