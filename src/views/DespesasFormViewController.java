@@ -21,7 +21,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.views.util.Alerts;
 import model.Categoria;
@@ -36,7 +38,7 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
   @FXML private Button addCategorieBt;
   @FXML private TextField nameProductField;
   @FXML private TextField descriptionProductField;
-  @FXML private TextField valueUnitProductField;
+  @FXML private DatePicker dateDp;
   @FXML private ComboBox<Categoria> categoriesCB;
   private Despesa product;
   private Usuario usuario;
@@ -57,7 +59,7 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
 
         if (nameProductField.getText().trim().isEmpty()
             || descriptionProductField.getText().trim().isEmpty()
-            || valueUnitProductField.getText().trim().isEmpty()
+            || dateDp.getValue() == null
             || categoriesCB.getSelectionModel().getSelectedItem() == null
             || categoriesCB.getSelectionModel().getSelectedItem().getNome().isEmpty()) {
           Alerts.showAlert("Error", null, "The fields must be filled", AlertType.ERROR);
@@ -71,8 +73,7 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
                 .criarDespesa(
                     nameProductField.getText(),
                     Double.parseDouble(descriptionProductField.getText().replace(',', '.')),
-                    LocalDate.parse(
-                        valueUnitProductField.getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                    dateDp.getValue(),
                     categoria);
 
             ControladorDadosPersistentes.getInstance().atualizarUsuario(usuario);
@@ -92,7 +93,7 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
 
         if (nameProductField.getText().trim().isEmpty()
             || descriptionProductField.getText().trim().isEmpty()
-            || valueUnitProductField.getText().trim().isEmpty()
+            || dateDp.getValue() == null
             || categoriesCB.getSelectionModel().getSelectedItem().getNome().isEmpty()) {
           Alerts.showAlert("Error", null, "The fields must be filled", AlertType.ERROR);
         } else {
@@ -107,8 +108,7 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
                     nameProductField.getText(),
                     product.getOrdem(),
                     Double.parseDouble(descriptionProductField.getText().replace(',', '.')),
-                    LocalDate.parse(
-                        valueUnitProductField.getText(), DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                    dateDp.getValue(),
                     categoria);
 
             ControladorDadosPersistentes.getInstance().atualizarUsuario(usuario);
@@ -141,6 +141,8 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
       controller.subscribeDataChangeListener(this);
 
       Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.setResizable(false);
       stage.setTitle("Criar categoria");
       stage.setScene(new Scene(newPage));
       stage.show();
@@ -171,9 +173,7 @@ public class DespesasFormViewController implements Initializable, IDataChangeLis
     String valor = "" + product.getValor();
     descriptionProductField.setText(valor);
 
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    String data = product.getData_criacao().format(format);
-    valueUnitProductField.setText(String.valueOf(data));
+    dateDp.setValue(product.getData_criacao());
 
     usuario = ControladorLogin.getInstance().getLoggedUser();
     ObservableList<Categoria> categoriasOS =

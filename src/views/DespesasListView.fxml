@@ -40,6 +40,7 @@
         <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#onButtonUpdateAction" text="Atualizar Despesa" />
         <Button fx:id="buttonDelete" mnemonicParsing="false" onAction="#onButtonDeleteAction" text="Deletar Despesa" />
             <Button fx:id="saveCsvBt" mnemonicParsing="false" onAction="#onSaveCsvBtAction" text="Salvar em .csv" />
+            <Button fx:id="dateFilterBt" mnemonicParsing="false" onAction="#onDateFilterBtAction" text="Filtrar por data" />
       </items>
     </ToolBar>
   </children>

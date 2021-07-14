@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import model.Categoria;
 import model.Meta;
@@ -31,7 +32,7 @@ public class MetaFormViewController implements Initializable {
   @FXML private Button backBt;
   @FXML private TextField nameProductField;
   @FXML private TextField descriptionProductField;
-  @FXML private TextField valueUnitProductField;
+  @FXML private DatePicker dateDp;
   private Meta product;
   private Usuario usuario;
 
@@ -49,7 +50,7 @@ public class MetaFormViewController implements Initializable {
       try {
 
         if (descriptionProductField.getText().trim().isEmpty()
-            || valueUnitProductField.getText().trim().isEmpty()) {
+            || dateDp.getValue() == null) {
           main.java.views.util.Alerts.showAlert(
               "Error", null, "The fields must be filled", AlertType.ERROR);
         } else {
@@ -60,9 +61,7 @@ public class MetaFormViewController implements Initializable {
                 .criarMeta(
                     Double.parseDouble(descriptionProductField.getText().replace(',', '.')),
                     nameProductField.getText(),
-                    LocalDate.parse(
-                        valueUnitProductField.getText(),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                    dateDp.getValue());
 
             ControladorDadosPersistentes.getInstance().atualizarUsuario(usuario);
 
@@ -84,7 +83,7 @@ public class MetaFormViewController implements Initializable {
       try {
 
         if (descriptionProductField.getText().trim().isEmpty()
-            || valueUnitProductField.getText().trim().isEmpty()) {
+            || dateDp.getValue() == null) {
           main.java.views.util.Alerts.showAlert(
               "Error", null, "The fields must be filled", AlertType.ERROR);
         } else {
@@ -95,9 +94,7 @@ public class MetaFormViewController implements Initializable {
                 .alterarMeta(
                     Double.parseDouble(descriptionProductField.getText().replace(',', '.')),
                     nameProductField.getText(),
-                    LocalDate.parse(
-                        valueUnitProductField.getText(),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                    dateDp.getValue());
 
             ControladorDadosPersistentes.getInstance().atualizarUsuario(usuario);
 
@@ -142,16 +139,11 @@ public class MetaFormViewController implements Initializable {
       String valor = "" + product.getValor();
       descriptionProductField.setText(valor);
 
-      DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-      String data = product.getData_criacao().format(format);
-      valueUnitProductField.setText(String.valueOf(data));
+      dateDp.setValue(product.getData_criacao());
     } else {
       String valor = "" + product.getValor();
       descriptionProductField.setText(valor);
-
-      DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-      String data = product.getData_criacao().format(format);
-      valueUnitProductField.setText(String.valueOf(data));
+      dateDp.setValue(product.getData_criacao());
 
       nameProductField.setText(product.getDescricao());
     }

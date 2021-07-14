@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MetaFormViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MetaFormViewController">
   <children>
     <GridPane alignment="CENTER" layoutX="22.0" layoutY="16.0" prefHeight="368.0" prefWidth="557.0">
       <columnConstraints>
@@ -22,8 +23,8 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <children>
+            <DatePicker fx:id="dateDp" editable="false" mouseTransparent="true" promptText="Data" />
         <TextField fx:id="descriptionProductField" promptText="Valor" GridPane.rowIndex="1" />
-        <TextField fx:id="valueUnitProductField" />
         <HBox spacing="20.0" GridPane.rowIndex="2" />
         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="4">
           <children>
